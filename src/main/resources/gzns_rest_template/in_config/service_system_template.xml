@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="gb18030"?>
+<msg package_type="xml" >
+		${rspHead}$
+		${response}$
+</msg>

@@ -1,0 +1,116 @@
+{
+  "nodes": [
+    {
+      "id": "节点1",
+      "name": "节点1",
+      "type": "table",
+      "left": 50,
+      "top": 50,
+      "columns": [
+        {
+          "id": "系统",
+          "datatype": "integer",
+          "primaryKey": true
+        },
+        {
+          "id": "服务",
+          "datatype": "varchar"
+        }
+      ]
+    },
+    {
+      "id": "节点2",
+      "name": "节点2",
+      "type": "table",
+      "left": 290,
+      "top": 79,
+      "columns": [
+        {
+          "id": "系统",
+          "datatype": "integer",
+          "primaryKey": true
+        },
+        {
+          "id": "服务",
+          "datatype": "varchar"
+        }
+      ]
+    },
+    {
+      "id": "节点3",
+      "name": "节点3",
+      "type": "table",
+      "left": 660,
+      "top": 187,
+      "columns": [
+        {
+          "id": "系统",
+          "datatype": "integer",
+          "primaryKey": true
+        },
+        {
+          "id": "服务",
+          "datatype": "varchar"
+        }
+      ]
+    },
+    {
+      "id": "节点4",
+      "name": "节点4",
+      "type": "table",
+      "left": 827,
+      "top": 414,
+      "columns": [
+        {
+          "id": "系统",
+          "datatype": "integer",
+          "primaryKey": true
+        },
+        {
+          "id": "服务",
+          "datatype": "varchar"
+        }
+      ]
+    },
+    {
+      "id": "节点5",
+      "name": "节点5",
+      "type": "table",
+      "left": 433,
+      "top": 558,
+      "columns": [
+        {
+          "id": "系统",
+          "datatype": "integer",
+          "primaryKey": true
+        },
+        {
+          "id": "服务",
+          "datatype": "varchar"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "节点1",
+      "target": "节点2",
+      "data": {"type": "1:N"}
+    },
+    {
+      "source": "节点3",
+      "target": "节点2",
+      "data": {"type": "1:1"}
+    },
+    {
+      "source": "节点1",
+      "target": "节点5",
+      "data": {"type": "1:1"}
+    },
+    {
+      "source": "节点4",
+      "target": "节点5",
+      "data": {"type": "1:1"}
+    }
+  ]
+}

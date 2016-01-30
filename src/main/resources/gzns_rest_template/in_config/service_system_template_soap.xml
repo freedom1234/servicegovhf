@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:s="http://esb.dcitsbiz.com/services/S120020001" xmlns:d="http://esb.dcitsbiz.com/metadata" package_type="soap" encoding="UTF-8">
+  <soapenv:Header>
+    <s:ReqHeader>
+      <d:Mac metadataid="Mac"/>
+      <d:MacOrgId metadataid="MacOrgId"/>
+      <d:TrgtSysId metadataid="TrgtSysId"/>
+      <d:RelMsgId metadataid="RelMsgId"/>
+      <d:SvcAdr isSdoHeader="true" expression="'S120020001'"/>
+      <d:SvcOpr isSdoHeader="true" expression="'OP01'"/>
+      <d:ExtdCntnt metadataid="ExtdCntnt"/>
+    </s:ReqHeader>
+  </soapenv:Header>
+  <soapenv:Body>
+    <s:RsqOP01>
+      <s:RspSvcHeader>
+        <s:TxnDt metadataid="TxnDt"/>
+        <s:TxnTm metadataid="TxnTm"/>
+        <s:BkndSeqNo metadataid="BkndSeqNo"/>
+        <s:BkndSysId metadataid="BkndSysId"/>
+        <s:GlblSeqNo metadataid="GlblSeqNo"/>
+        <s:RetCd metadataid="RetCd"/>
+        <s:RetMsg metadataid="RetMsg"/>
+        <s:LngCd metadataid="LngCd"/>
+        <s:FltMsg metadataid="FltMsg"/>
+        <s:FltCd metadataid="FltCd"/>
+      </s:RspSvcHeader>
+      ${response}$
+    </s:RsqOP01>
+  </soapenv:Body>
+</soapenv:Envelope>

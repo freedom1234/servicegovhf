@@ -1,0 +1,14 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+/target
+/.idea
+/.idea/workspace.xml
+/servicegov.iml
+/src/main/resources/config/jdbc.properties
+/src/main/resources/META-INF/persistence.xml
+/src/main/resources/config/jdbc.properties
+/.idea

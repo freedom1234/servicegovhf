@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<esb_xml>
+    <request>
+        <sdoroot>
+            <APP_HEAD>
+                <BranchId metadataid="BranchId" chinese_name="机构代码"/>
+                <TellerNo metadataid="TellerNo" chinese_name="柜员号"/>
+                <AuthTellerNo metadataid="AuthTellerNo" chinese_name="授权柜员标识"/>
+                <AuthTellerPassword metadataid="AuthTellerPassword" chinese_name="授权柜员密码"/>
+            </APP_HEAD>
+            <SYS_HEAD>
+                <ServiceCode metadataid="ServiceCode" chinese_name="服务代码"/>
+                <ServiceScene metadataid="ServiceScene" chinese_name="服务场景"/>
+                <ConsumerId metadataid="ConsumerId" chinese_name="消费系统编号"/>
+                <ConsumerSeqNo metadataid="ConsumerSeqNo" chinese_name="系统流水号"/>
+                <OrgConsumerSeqNo metadataid="OrgConsumerSeqNo" chinese_name="发起方业务流水号"/>
+                <TranDate metadataid="TranDate" chinese_name="交易日期"/>
+                <TranTime metadataid="TranTime" chinese_name="交易时间"/>
+                <FilFlg metadataid="FilFlg" chinese_name="文件标志"/>
+                <TerminalCode metadataid="TerminalCode" chinese_name="终端号"/>
+            </SYS_HEAD>
+            <BODY>
+            ${request}$
+            </BODY>
+        </sdoroot>
+    </request>
+    <response>
+        <sdoroot>
+            <SYS_HEAD>
+                <ServiceCode metadataid="ServiceCode" chinese_name="服务代码"/>
+                <ServiceScene metadataid="ServiceScene" chinese_name="服务场景"/>
+                <ConsumerId metadataid="ConsumerId" chinese_name="消费系统编号"/>
+                <ConsumerSeqNo metadataid="ConsumerSeqNo" chinese_name="系统流水号"/>
+                <SplrSeqNo metadataid="SplrSeqNo" chinese_name="服务提供方流水号"/>
+                <TranDate metadataid="TranDate" chinese_name="交易日期"/>
+                <TranTime metadataid="TranTime" chinese_name="交易时间"/>
+                <Ret metadataid="Ret" type="array" is_struct="false">
+                    <sdo>
+                        <ReturnStatus metadataid="ReturnStatus" chinese_name="交易状态"/>
+                        <ReturnCode metadataid="ReturnCode" chinese_name="交易返回代码"/>
+                        <ReturnMsg metadataid="ReturnMsg" chinese_name="交易返回信息"/>
+                    </sdo>
+                </Ret>
+                <FilFlg metadataid="FilFlg" chinese_name="文件标志"/>
+                <TerminalCode metadataid="TerminalCode" chinese_name="终端号"/>
+            </SYS_HEAD>
+            <APP_HEAD>
+                <BranchId metadataid="BranchId" chinese_name="机构代码"/>
+                <TellerNo metadataid="TellerNo" chinese_name="柜员号"/>
+                <AuthTellerNo metadataid="AuthTellerNo" chinese_name="授权柜员标识"/>
+            </APP_HEAD>
+            <BODY>
+            ${response}$
+            </BODY>
+        </sdoroot>
+    </response>
+</esb_xml>

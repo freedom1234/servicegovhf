@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping-config>
+	<tran id="${ecode}$" channel="${systemAb}$">			
+			${request}$
+			${response}$
+
+			<error-mapping base="default" dict="esb"> 
+				<error-head channel="${systemAb}$"/>			
+			</error-mapping>
+	</tran>
+</mapping-config>

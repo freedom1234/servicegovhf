@@ -1,0 +1,35 @@
+
+<fieldset>
+ <legend>条件过滤</legend>
+ <table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th>关键字</th>
+    <td>
+      <input class="easyui-textbox" type="text" name="name" ></td>
+   
+    <td><a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-search">过滤</a></td>
+
+  </tr>
+</table>
+
+</fieldset>
+<table class="easyui-datagrid" title="版本历史" 
+			data-options="rownumbers:true,singleSelect:true,url:'datagrid_data1.json',method:'get',toolbar:toolbar,pagination:true,
+				pageSize:10" style="height:365px; width:auto;">
+  <thead>
+    <tr>
+          <th data-options="field:'productid',checkbox:true"> </th>
+
+    
+      <th data-options="field:'itemid'">字段1 </th>
+      <th data-options="field:'status'">字段2 </th>
+      <th data-options="field:'listprice',align:'right'">字段3 </th>
+      <th data-options="field:'unitcost',width:80,align:'right'">字段4 </th>
+      <th data-options="field:'attr1'">消费方 </th>
+    
+    </tr>
+  </thead>
+</table>
+<div class="win-bbar">
+	<a href="#" class="easyui-linkbutton"  iconCls="icon-cancel" onClick="$('#w').window('close')">取消</a><a href="#" class="easyui-linkbutton"  iconCls="icon-ok">选择</a>
+</div>

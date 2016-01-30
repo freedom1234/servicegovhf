@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv ="X-UA-Compatible" content ="IE=edge" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>列表页</title>
+<link rel="stylesheet" type="text/css" href="/resources/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="/resources/themes/icon.css">
+<link href="/resources/css/ui.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<fieldset>
+ <legend>主代码</legend>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+      <th>元数据名称</th>
+    <td> <input class="easyui-textbox" type="text" name="name" ></td>
+   
+   <th>中文名称</th>
+    <td> <input class="easyui-textbox" type="text" name="name" >
+      </td>
+   <th>&nbsp;</th>
+    <td>&nbsp; </td>
+  </tr>
+  <tr>
+     <th>是否标准代码</th>
+    <td><select class="easyui-combobox" panelHeight="auto" style="width:155px">
+				<option value="java">节点1</option>
+				<option value="c">节点2</option>
+				<option value="basic">节点3</option>
+				<option value="perl">节点4</option>
+			</select></td>
+    <th>标准代码ID</th>
+    <td> <input class="easyui-textbox" type="text" name="name" ></td>
+     <th>主代码数据来源</th>
+    <td><select class="easyui-combobox" panelHeight="auto" style="width:155px">
+				<option value="java">节点1</option>
+				<option value="c">节点2</option>
+				<option value="basic">节点3</option>
+				<option value="perl">节点4</option>
+			</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td colspan="4" align="right"><a href="#" class="easyui-linkbutton"  iconCls="icon-qxfp" onclick="showZdm()">主代码</a>&nbsp;&nbsp;<a href="#" class="easyui-linkbutton"  iconCls="icon-qxfp" onclick="showCdm()">从代码值</a>&nbsp;&nbsp;<a href="#" onclick="showYsgz()" class="easyui-linkbutton"  iconCls="icon-qxfp">映射规则</a>&nbsp;&nbsp;<a href="#" class="easyui-linkbutton"  iconCls="icon-save">保存</a></td>
+    </tr>
+</table>
+
+
+</fieldset>
+<table class="easyui-datagrid" title="从代码列表" 
+			data-options="rownumbers:true,singleSelect:false,url:'../datagrid_data1.json',method:'get',toolbar:toolbar,pagination:true,
+				pageSize:10" style="height:370px; width:auto;">
+  <thead>
+    <tr>
+          <th data-options="field:'productid',checkbox:true"> </th>
+
+    
+      <th data-options="field:'itemid'">字段1 </th>
+      <th data-options="field:'status'">字段2 </th>
+      <th data-options="field:'listprice',align:'right'">字段3 </th>
+      <th data-options="field:'unitcost',width:80,align:'right'">字段4 </th>
+      <th data-options="field:'attr1'">消费方 </th>
+      <th data-options="field:'status',width:60,align:'center'">字段5 </th>
+      <th data-options="field:'attr1'"> 字段6 </th>
+      <th data-options="field:'attr1'"> 字段7 </th>
+      <th data-options="field:'attr1'">字段8 </th>
+      <th data-options="field:'attr1'">字段9 </th>
+    </tr>
+  </thead>
+</table>
+<div id="w" class="easyui-window" title="" data-options="modal:true,closed:true,iconCls:'icon-add'" style="width:500px;height:200px;padding:10px;">
+		
+</div>
+<script type="text/javascript">
+		var toolbar = [
+		{
+			text:'删除',
+			iconCls:'icon-remove',
+			handler:function(){
+				
+			}
+		}];
+		function showZdm(){
+			var content = '<iframe scrolling="auto" frameborder="0"  src="/dataTemplate/words/grid3.html" style="width:100%;height:100%;"></iframe>';
+
+				parent.uiinit.subtab.add({
+					title:'主代码值',
+					content:content	
+				})	
+		}
+		function showCdm(){
+			var content = '<iframe scrolling="auto" frameborder="0"  src="/dataTemplate/words/grid5.html" style="width:100%;height:100%;"></iframe>';
+
+				parent.uiinit.subtab.add({
+					title:'从代码值',
+					content:content	
+				})	
+		}
+		function showYsgz(){
+			var content = '<iframe scrolling="auto" frameborder="0"  src="/dataTemplate/words/grid4.html" style="width:100%;height:100%;"></iframe>';
+
+				parent.uiinit.subtab.add({
+					title:'映射规则',
+					content:content	
+				})	
+		}
+	</script> 
+<script type="text/javascript" src="/resources/js/jquery.min.js"></script> 
+<script type="text/javascript" src="/resources/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/resources/js/ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+[{
+	"id":1,
+	"text":"服务一",
+	"children":[{
+		"id":11,
+		"text":"服务场景1",
+		"state":"closed"
+		
+	},{
+		"id":12,
+		"text":"服务场景2",
+		"state":"closed"
+		
+	},{
+		"id":13,
+		"text":"服务场景3",
+		"state":"closed"
+		
+	},{
+		"id":14,
+		"text":"服务场景4",
+		"state":"closed"
+		
+	}]
+},{
+	"id":2,
+	"text":"服务二",
+	"children":[{
+		"id":21,
+		"text":"服务场景2",
+		"state":"closed"
+		
+	},{
+		"id":22,
+		"text":"服务场景3",
+		"state":"closed"
+		
+	},{
+		"id":23,
+		"text":"服务场景4",
+		"state":"closed"
+		
+	},{
+		"id":24,
+		"text":"服务场景5",
+		"state":"closed"
+		
+	}]
+}]

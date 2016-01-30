@@ -1,0 +1,12 @@
+[
+  {
+    "id":"metadata",
+    "name":"元数据"
+  },{
+    "id":"service",
+    "name":"服务"
+  },{
+  "id":"sgenum",
+  "name":"公共代码"
+  }
+]

@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv ="X-UA-Compatible" content ="IE=edge" >
+    <title>交易链路</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <link rel="stylesheet" href="/plugin/jsPlumb/css/jsplumb.css">
+    <link rel="stylesheet" href="demo.css">
+    <link href="/newui/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/newui/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/newui/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/newui/plugins/select2/select2.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body data-demo-id="statemachine" data-library="dom">
+
+<div>
+    <div class="form-group">
+        <table>
+            <tr>
+                <td style="padding:0.5em"><label>选择接口</label></td>
+                <td style="padding:0.5em"><select class="form-control select2" style="width:20em" multiple="multiple" data-placeholder="选择接口"></select></td>
+                <td style="padding:0.5em"><button id="add" class="btn btn-block btn-primary">添加</button></td>
+            </tr>
+        </table>
+    </div>
+    <!-- demo -->
+    <div class="demo statemachine-demo" id="statemachine-demo" style="background-color: aliceblue;">
+
+    </div>
+    <!-- /demo -->
+</div>
+<!-- JS -->
+<!-- support lib for bezier stuff -->
+<script src="/plugin/jsPlumb/lib/jsBezier-0.7.js"></script>
+<!-- event adapter -->
+<script src="/plugin/jsPlumb/lib/mottle-0.6.js"></script>
+<!-- geometry functions -->
+<script src="/plugin/jsPlumb/lib/biltong-0.2.js"></script>
+<!-- drag -->
+<script src="/plugin/jsPlumb/lib/katavorio-0.6.js"></script>
+<!-- jsplumb util -->
+<script src="/plugin/jsPlumb/src/util.js"></script>
+<script src="/plugin/jsPlumb/src/browser-util.js"></script>
+<!-- main jsplumb engine -->
+<script src="/plugin/jsPlumb/src/jsPlumb.js"></script>
+<!-- base DOM adapter -->
+<script src="/plugin/jsPlumb/src/dom-adapter.js"></script>
+<script src="/plugin/jsPlumb/src/overlay-component.js"></script>
+<!-- endpoint -->
+<script src="/plugin/jsPlumb/src/endpoint.js"></script>
+<!-- connection -->
+<script src="/plugin/jsPlumb/src/connection.js"></script>
+<!-- anchors -->
+<script src="/plugin/jsPlumb/src/anchors.js"></script>
+<!-- connectors, endpoint and overlays  -->
+<script src="/plugin/jsPlumb/src/defaults.js"></script>
+<!-- bezier connectors -->
+<script src="/plugin/jsPlumb/src/connectors-bezier.js"></script>
+<!-- state machine connectors -->
+<script src="/plugin/jsPlumb/src/connectors-statemachine.js"></script>
+<!-- flowchart connectors -->
+<script src="/plugin/jsPlumb/src/connectors-flowchart.js"></script>
+<script src="/plugin/jsPlumb/src/connector-editors.js"></script>
+<!-- SVG renderer -->
+<script src="/plugin/jsPlumb/src/renderers-svg.js"></script>
+
+<!-- vml renderer -->
+<script src="/plugin/jsPlumb/src/renderers-vml.js"></script>
+
+<!-- common adapter -->
+<script src="/plugin/jsPlumb/src/base-library-adapter.js"></script>
+<!-- no library jsPlumb adapter -->
+<script src="/plugin/jsPlumb/src/dom.jsPlumb.js"></script>
+<!-- /JS -->
+
+<!--  demo code -->
+<!--<script src="demo.js"></script>-->
+<script src="/newui/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="/newui/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/newui/plugins/select2/select2.full.min.js" type="text/javascript"></script>
+<script src="/assets/serviceLink/serviceLinkManager.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var data = {};
+    var initComboBox = function (result) {
+        for (var i = 0; i < result.length; i++) {
+            data[result[i].interfaceName] = result[i];
+            $(".select2").append('<option value="'+result[i].interfaceName+'" >接口:' + result[i].interfaceName + '服务:'+result[i].serviceId+'</option>');
+        }
+        $(".select2").select2();
+    };
+    serviceLinkManager.getAll(initComboBox);
+
+    var context = "";
+    var connections = [];
+    var blocks = [];
+
+    $(function () {
+        var instance;
+        $("#add").click(function () {
+
+
+            if (instance) {
+                $.each(instance.getConnections(), function (idx, connection) {
+                    connections.push({
+                        connectionId: connection.id,
+                        sourceId: connection.sourceId,
+                        targetId: connection.targetId
+                    });
+                });
+                $("#statemachine-demo .w").each(function (idx, elem) {
+                    var $elem = $(elem);
+                    blocks.push({
+                        blockId: $elem.attr('id'),
+                        positionX: parseInt($elem.css("left"), 10),
+                        positionY: parseInt($elem.css("top"), 10)
+                    });
+                });
+            }
+            var addInterfaceIds = $(".select2").val();
+            for (var i = 0; i < addInterfaceIds.length; i++) {
+                var row = data[addInterfaceIds[i]];
+                var interfaceId = row.interfaceName;
+                var serviceId = row.serviceId;
+                var systemId = row.systemName;
+
+                context += '<div class="w" id="' + interfaceId + '">' + interfaceId
+                + '<div class="ep"></div>'
+                + '<div>'
+                + '<div class="btn-group">'
+                + '<button type="button" class="btn btn-info">查看详细信息</button>'
+                + '<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">'
+                + '<span class="caret"></span>'
+                + '<span class="sr-only">Toggle Dropdown</span>'
+                + '</button>'
+                + '<ul class="dropdown-menu" role="menu">'
+                + '<li><a>系统:' + serviceId + '</a></li>'
+                + '<li><a>服务:' + systemId + '</a></li>'
+                + '</ul>'
+                + '</div>'
+                + '</div>'
+                + '</div>';
+            }
+            document.getElementById("statemachine-demo").innerHTML = context;
+            for (var i = 0; i < blocks.length; i++) {
+                $("#" + blocks[i].blockId).css("left", blocks[i].positionX);
+                $("#" + blocks[i].blockId).css("top", blocks[i].positionY);
+            }
+            jsPlumb.ready(function () {
+                // setup some defaults for jsPlumb.
+                instance = jsPlumb.getInstance({
+                    Endpoint: ["Dot", {radius: 2}],
+                    HoverPaintStyle: {strokeStyle: "#1e8141", lineWidth: 2},
+                    ConnectionOverlays: [
+                        ["Arrow", {
+                            location: 1,
+                            id: "arrow",
+                            length: 5,
+                            foldback: 0.3
+                        }],
+                        ["Label", {label: "FOO", id: "label", cssClass: "aLabel"}]
+                    ],
+                    Container: "statemachine-demo"
+                });
+                window.jsp = instance;
+                var windows = jsPlumb.getSelector(".statemachine-demo .w");
+                // initialise draggable elements.
+                instance.draggable(windows);
+                // bind a click listener to each connection; the connection is deleted. you could of course
+                // just do this: jsPlumb.bind("click", jsPlumb.detach), but I wanted to make it clear what was
+                // happening.
+                instance.bind("click", function (c) {
+                    instance.detach(c);
+                });
+                // bind a connection listener. note that the parameter passed to this function contains more than
+                // just the new connection - see the documentation for a full list of what is included in 'info'.
+                // this listener sets the connection's internal
+                // id as the label overlay's text.
+                instance.bind("connection", function (info) {
+                    info.connection.getOverlay("label").setLabel("调用");
+                });
+                // suspend drawing and initialise.
+                instance.batch(function () {
+                    instance.makeSource(windows, {
+                        filter: ".ep",
+                        anchor: "Continuous",
+                        connector: ["StateMachine", {curviness: 20}],
+                        connectorStyle: {
+                            strokeStyle: "#5c96bc",
+                            lineWidth: 2,
+                            outlineColor: "transparent",
+                            outlineWidth: 4
+                        },
+                        maxConnections: 5,
+                        onMaxConnections: function (info, e) {
+                            alert("Maximum connections (" + info.maxConnections + ") reached");
+                        }
+                    });
+                    // initialise all '.w' elements as connection targets.
+                    instance.makeTarget(windows, {
+                        dropOptions: {hoverClass: "dragHover"},
+                        anchor: "Continuous",
+                        allowLoopback: true
+                    });
+                    for (var i = 0; i < connections.length; i++) {
+                        instance.connect({source: connections[i].sourceId, target: connections[i].targetId});
+                    }
+                    connections = [];
+                });
+                jsPlumb.fire("jsPlumbDemoLoaded", instance);
+            });
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:s="http://esb.dcitsbiz.com/services/S120020001" xmlns:d="http://esb.dcitsbiz.com/metadata" package_type="soap" encoding="UTF-8">
+  <soapenv:Header>
+    <s:ReqHeader>
+      <d:Mac metadataid="Mac"/>
+      <d:MacOrgId metadataid="MacOrgId"/>
+      <d:SrcSysId metadataid="SrcSysId"/>
+      <d:CnsmrId metadataid="CnsmrId"/>
+      <d:SvcAdr metadataid="SvcAdr"/>
+      <d:SvcOpr metadataid="SvcOpr"/>
+      <d:ReplyAdr metadataid="ReplyAdr"/>
+      <d:ExtdCntnt metadataid="ExtdCntnt"/>
+    </s:ReqHeader>
+  </soapenv:Header>
+  <soapenv:Body>
+    <s:ReqOP01>
+      <s:ReqSvcHeader>
+        <s:TxnDt metadataid="TxnDt"/>
+        <s:TxnTm metadataid="TxnTm"/>
+        <s:TxnTrlNo metadataid="TxnTrlNo"/>
+        <s:TxnSeqNo metadataid="TxnSeqNo"/>
+        <s:GlblSeqNo metadataid="GlblSeqNo"/>
+        <s:BrId metadataid="BrId"/>
+        <s:ChnlTp metadataid="ChnlTp"/>
+        <s:TmlCd metadataid="TmlCd"/>
+        <s:CityCd metadataid="CityCd"/>
+        <s:PIN metadataid="PIN"/>
+        <s:KeyVsnNo metadataid="KeyVsnNo"/>
+        <s:SysOfst1 metadataid="SysOfst1"/>
+        <s:SysOfst2 metadataid="SysOfst2"/>
+        <s:AhrTrlNo metadataid="AhrTrlNo"/>
+        <s:AhrPswd metadataid="AhrPswd"/>
+        <s:AhrCardFlg metadataid="AhrCardFlg"/>
+        <s:AhrCardNo metadataid="AhrCardNo"/>
+        <s:LngCd metadataid="LngCd"/>
+      </s:ReqSvcHeader>
+      ${response}$
+    </s:ReqOP01>
+  </soapenv:Body>
+</soapenv:Envelope>

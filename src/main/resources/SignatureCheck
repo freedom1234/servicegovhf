@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SignatureCheck>
+    <service>
+        <serviceId>010010000101</serviceId>
+        <signatureField type="string|hex|bytes">/sdoroot/hehehe/hehehehe</signatureField>
+        <checkFiled type="string|hex|bytes">/sdoroot/hehehe/lalala + /sdoroot/lalala/kakaka</checkFiled>
+        <checkerImpl>com.dc.esb.check</checkerImpl>
+    </service>
+</SignatureCheck>

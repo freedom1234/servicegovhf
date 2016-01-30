@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service package_type="fix" store-mode="UTF-8">
+    <transaction_sn metadataid="ConsumerSeqNo" type="char" length="19" />
+    <transaction_id type="char" length="14" />
+    <requester_id metadataid="ConsumerId" type="char" length="10" />
+    <transaction_inst metadataid="BranchId" type="char" length="10" />
+    <transaction_opr metadataid="TellerNo" type="char" length="10" />
+    <transaction_auth metadataid="AuthTellerNo" type="char" length="10" />
+    <transaction_date metadataid="TranDate" type="char" length="8" />
+    <transaction_time metadataid="TranTime" type="char" length="6" />
+    <transaction_terno metadataid="TerminalCode" type="char" length="5" />
+    <transaction_opr_sn metadataid="OrgConsumerSeqNo" type="char" length="30" />
+    <ext_attributes metadataid="ECIFInnrArray" />
+    <INM_PROCESS_CODE metadataid="TxnCd" type="char" length="10" />
+    <INM_CUST_TYPE metadataid="CstTp" type="char" length="2" />
+    <INM_REQ_TX_DATE metadataid="CnlDt" type="char" length="8" />
+    <INM_REQ_TX_TIME metadataid="CnlTm" type="char" length="6" />
+    <ext_attributes metadataid="ECIFInnrArray" />
+    <tran_response />
+    <status metadataid="ReturnStatus" type="char" length="20" />
+    <code metadataid="ReturnCode" type="char" length="12" />
+    <desc metadataid="ReturnMsg" type="char" length="80" />
+    <tran_response metadataid="Ret" />
+<PRINT_GROUP>
+    <ECIF_CUST_NO metadataid="CstNo" type="VARCHAR" length="30" />
+    <EXT_SYSTEM_ID metadataid="StmNo" type="VARCHAR" length="30" />
+    <PARTY_NAME metadataid="CstNm" type="VARCHAR" length="80" />
+    <CERT_TYPE metadataid="IdentTp" type="VARCHAR" length="30" />
+    <CERT_NO metadataid="IdentNo" type="VARCHAR" length="40" />
+    <LINK_TEL metadataid="CtcTel" type="VARCHAR" length="30" />
+    <COMPANY_NO metadataid="OrgNo" type="VARCHAR" length="30" />
+    <GOVN_CERT_NO metadataid="BsnOrgNo" type="VARCHAR" length="48" />
+    <ALL_RESULT_SIZE metadataid="TotNum" type="NUMBER" length="9" />
+    <PRINT_GROUP type="array" metadataida="PrtArray" />
+    <FIELD_NAME metadataid="FldNm" type="VARCHAR" length="30" />
+    <FIELD_OLD metadataid="OldFldVal" type="VARCHAR" length="200" />
+    <FIELD_NEW metadataid="NewFldVal" type="VARCHAR" length="200" />
+</PRINT_GROUP>
+
+        </service>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service package_type="xml" store-mode="GBK">
+    <SYS_HEAD>
+        <SvcId metadataid="SvcId"/>
+        <SvcScnId metadataid="SvcScnId"/>
+        <CnsmSysId metadataid="CnsmSysId"/>
+        <PrvdSysId metadataid="PrvdSysId"/>
+        <CnsmSysSeqNo metadataid="CnsmSysSeqNo"/>
+        <PrvdSysSeqNo metadataid="PrvdSysSeqNo"/>
+        <Mac metadataid="Mac"/>
+        <MacOrgId metadataid="MacOrgId"/>
+        <TranDate metadataid="TranDate"/>
+        <TranTime metadataid="TranTime"/>
+        <TranRetSt metadataid="TranRetSt"/>
+        <array>
+            <RetInf metadataid="RetInf" type="array">
+                <sdo>
+                    <RetCode metadataid="RetCode"/>
+                    <RetMsg metadataid="RetMsg"/>
+                </sdo>
+            </RetInf>
+        </array>
+        <PrvdSysSvrId metadataid="PrvdSysSvrId"/>
+    </SYS_HEAD>
+    <APP_HEAD>
+        <TellerId metadataid="TellerId"/>
+        <BranchId metadataid="BranchId"/>
+        <TlrPswd metadataid="TlrPswd"/>
+        <TlrLvl metadataid="TlrLvl"/>
+        <TlrType metadataid="TlrType"/>
+        <ChkFlag metadataid="ChkFlag"/>
+        <AuthFlag metadataid="AuthFlag"/>
+        <AuthTlrId metadataid="AuthTlrId"/>
+        <AuthBrchId metadataid="AuthBrchId"/>
+    </APP_HEAD>
+    ${response}$
+</service>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv ="X-UA-Compatible" content ="IE=edge" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="/resources/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="/resources/themes/icon.css">
+<link href="/resources/css/ui.css" rel="stylesheet" type="text/css">
+	 <script type="text/javascript" src="/resources/js/jquery.min.js"></script> 
+        <script type="text/javascript" src="/resources/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.edatagrid.js"></script>
+
+<script type="text/javascript" src="/resources/js/ui.js"></script>
+
+</head>
+<body >
+<fieldset>
+ <legend>交易节点信息</legend>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+      <th>交易码</th>
+    <td> <input class="easyui-textbox" type="text" disabled name="name" ></td>
+   
+   <th>交易名称</th>
+    <td> <input class="easyui-textbox" type="text" disabled name="name" >
+      </td>
+   <th>接口功能描述</th>
+    <td> <input class="easyui-textbox" type="text" disabled name="name" ></td>
+  </tr>
+  <tr>
+     <th>交易状态</th>
+    <td><input class="easyui-textbox" type="text" disabled name="name" ></td>
+    <th>报文头</th>
+    <td><input class="easyui-textbox" type="text" disabled name="name" ></td>
+     <th> 通讯协议</th>
+    <td><input class="easyui-textbox" type="text" disabled name="name" ></td>
+  </tr>
+<tr>
+     <th>&nbsp;</th>
+    <td>&nbsp;</td>
+    <th>&nbsp;</th>
+    <td>&nbsp;</td>
+     <td colspan="2" align="right"><a href="#" class="easyui-linkbutton" id="yl-btn"  iconCls="icon-qxfp">预览</a>&nbsp;&nbsp;<a href="#" class="easyui-linkbutton"  iconCls="icon-save">保存</a></td>
+    </tr>
+</table>
+
+
+
+</fieldset>
+	<table class="easyui-datagrid" id="tt" title="依赖节点信息管理" 
+			data-options="rownumbers:true,singleSelect:false,url:'../datagrid_data1.json',method:'get',toolbar:toolbar,pagination:true,
+				pageSize:10" style="height:370px; width:auto;">
+		<thead>
+			<tr>
+				
+<th field="itemid" width="100" editor="{type:'validatebox',options:{required:true}}">Item ID</th>
+				<th field="productid" width="100" editor="text">Product ID</th>
+				<th field="listprice" width="100" align="right" editor="{type:'numberbox',options:{precision:1}}">List Price</th>
+				<th field="unitcost" width="100" align="right" editor="numberbox">Unit Cost</th>
+				<th field="attr1" width="150" editor="text">Attribute</th>
+			</tr>
+		</thead>
+	</table>
+  <script type="text/javascript">
+		var toolbar = [{
+			text:'新增',
+			iconCls:'icon-add',
+			handler:function(){
+				uiinit.win({
+					w:500,
+					iconCls:'icon-add',
+					title:"新增依赖关系",
+					url : "/dataTemplate/formTemplate/form.html"
+				});	
+			}
+		},
+		{
+			text:'修改',
+			iconCls:'icon-edit',
+			handler:function(){
+				uiinit.win({
+					w:500,
+					iconCls:'icon-edit',
+					title:"修改依赖关系",
+					url : "/dataTemplate/formTemplate/form.html"
+				});	
+			}
+		},
+		{
+			text:'删除',
+			iconCls:'icon-remove',
+			handler:function(){
+				
+			}
+		}];
+		$("#yl-btn").click(function(){
+							 var content = '<iframe scrolling="auto" frameborder="0"  src="/dataTemplate/syslink/t4.html" style="width:100%;height:100%;"></iframe>';
+
+				parent.uiinit.subtab.add({
+							title:'交易链路预览',
+							content : content	
+						})		
+			
+		})
+	</script>   
+  
+
+</body>
+</html>

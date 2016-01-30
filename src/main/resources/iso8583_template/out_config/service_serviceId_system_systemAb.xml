@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service package_type="iso8583" store-mode="GBK">
+    ${reqHead}$
+    ${request}$
+</service>

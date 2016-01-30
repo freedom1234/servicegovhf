@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv ="X-UA-Compatible" content ="IE=edge" >
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>脚本生成</title>
+    <link rel="stylesheet" type="text/css" href="/resources/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/resources/themes/icon.css">
+    <link href="/resources/css/ui.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="easyui-layout">
+
+<fieldset>
+    <legend>脚本生成</legend>
+    <form id="uploadimg-form"  action="/sqlGenerate/import" method="post" enctype="multipart/form-data" onsubmit="uploading()">
+        <!--<shiro:hasPermission name="importExcel-update">-->
+            <input type="file" title="选择文件" name="file" id="file"/>
+            <br /><br />
+            <input id="fileBtn" type="submit" class="btn" value="文件上传"/><br /><br />
+        <!--</shiro:hasPermission>-->
+    </form>
+</fieldset>
+<script type="javascript">
+    function uploading(){
+        $.messager.progress({
+            title:'请稍后',
+            msg:'正在上传文件...'
+        });
+    }
+</script>
+<script type="text/javascript" src="/resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/resources/js/ui.js"></script>
+</body>
+</html>

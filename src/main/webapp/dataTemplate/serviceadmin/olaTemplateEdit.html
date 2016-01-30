@@ -1,0 +1,127 @@
+<meta http-equiv ="X-UA-Compatible" content ="IE=edge" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<table id="olaTemplateTable" style="height:auto; width:auto;"
+	title=""
+	data-options="rownumbers:true,singleSelect:true,url:'/olaTemplate/getAll',method:'get',toolbar:olaTemplatetoolbar,pagination:true,
+				pageSize:10">
+	<thead>
+		<tr>
+			<th data-options="field:'productid',checkbox:true"></th>
+			<th field="olaTemplateId" width="100" editor="text" id="idText"
+				data-options="hidden:true">ID</th>
+			<th field="templateName" width="100" editor="text" align="center">OLA模板名称</th>
+			<th field="desc" width="150" align="center" editor="text">描 述</th>
+		</tr>
+	</thead>
+</table>
+<div id="w" class="easyui-window" title=""
+	data-options="modal:true,closed:true,iconCls:'icon-add'"
+	style="width:500px;height:200px;padding:10px;"></div>
+<script type="text/javascript" src="/assets/olaTemplate/js/olaTemplateManager.js"></script>
+<script type="text/javascript" src="/assets/ola/js/olaManager.js"></script>
+<script type="text/javascript">
+	
+	
+	var olaTemplatetoolbar = [
+			{
+				text : '新增',
+				iconCls : 'icon-add',
+				handler : function() {
+					$('#olaTemplateTable').edatagrid('addRow');
+					}
+			},{
+				text : '编辑',
+				iconCls : 'icon-edit',
+				handler : function() {
+				
+				var row = $('#olaTemplateTable').datagrid("getSelected");
+					var content = '<iframe scrolling="auto" frameborder="0"  src="/dataTemplate/serviceadmin/olaTemplate.jsp?olaTemplateId='+row.olaTemplateId+'" style="width:100%;height:100%;"></iframe>';
+// 					alert(content);
+					parent.parent.parent.addTab('服务场景', content);
+					}
+			},
+			{
+				text : '删除',
+				iconCls : 'icon-remove',
+				handler : function() {
+					var row = $('#olaTemplateTable').edatagrid('getSelected');
+					var rowIndex = $('#olaTemplateTable').edatagrid(
+							'getRowIndex', row);
+					$('#olaTemplateTable').edatagrid('deleteRow', rowIndex);
+				}
+			},
+			{
+				text : ' 保存',
+				iconCls : 'icon-save',
+				handler : function() {
+					var deletedDatas = $('#olaTemplateTable').edatagrid(
+							'getChanges', 'deleted');
+					var addDatas = $('#olaTemplateTable').edatagrid(
+							'getChanges', 'inserted');
+					var updatedDatas = $('#olaTemplateTable').edatagrid('getChanges',
+						'updated');
+					for ( var i = 0; i < addDatas.length; i++) {
+						var addData = addDatas[i];
+						var data = {};
+						if (addData.templateName) {
+							data.templateName = addData.templateName;
+							data.desc = addData.desc;
+							olaTemplateManager.add(data, function(result) {
+								if (result) {
+									alert(result);
+									alert("保存成功");
+								} else {
+									alert("保存失败");
+								}
+							});
+						}
+					}
+					for ( var j = 0; j < deletedDatas.length; j++) {
+						var deleteData = deletedDatas[j];
+						olaTemplateManager.deleteById(deleteData.olaTemplateId,
+								function(result) {
+									if (result) {
+										alert("删除成功");
+									} else {
+										alert("删除失败");
+									}
+								});
+					}
+					for ( var k = 0; k < updatedDatas.length; k++) {
+						var updatedData = updatedDatas[k];
+						var data = {};
+						data.olaTemplateId=updatedData.olaTemplateId;
+						data.templateName = updatedData.templateName;
+						data.desc = updatedData.desc;
+						olaTemplateManager.modify(data, function(result) {
+							if (result) {
+								alert("修改成功");
+							} else {
+								alert("修改失败");
+							}
+						});
+					}
+				}
+			}, {
+				text : '选择',
+				iconCls : 'icon-qxfp',
+				handler : function() {
+					var info = $('#olaTemplateTable').edatagrid('getSelected');
+					olaManager.getByParams(info.olaTemplateId,function(result){
+						$('#ola').edatagrid('loadData',result);
+					});
+					$('#w').window('close');
+				}
+			} ];
+	$(function() {
+		$('#olaTemplateTable').edatagrid({
+			autoSave : false,
+			saveUrl : '/',
+			updateUrl : '/',
+			destroyUrl : '/'
+		});
+
+	});
+</script>
+

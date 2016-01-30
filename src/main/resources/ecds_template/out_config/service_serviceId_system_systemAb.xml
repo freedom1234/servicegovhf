@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdoroot package_type="mixed" store-mode="GB18030">
+    <header type="fix">
+        <tranCode length="4" type="string" isSdoHeader="true"/>
+    </header>
+    <body type="xml" createXmlHead="true" xmlencoding="GB18030">
+        <Result package_type="xml">
+            ${reqHead}$
+            ${request}$
+        </Result>
+    </body>
+</sdoroot>

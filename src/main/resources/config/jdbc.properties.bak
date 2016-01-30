@@ -1,0 +1,21 @@
+#jdbc settings
+#jdbc.driver=com.ibm.db2.jcc.DB2Driver
+#jdbc.url=jdbc:db2://localhost:50000/esbsg
+jdbc.driver=oracle.jdbc.driver.OracleDriver
+jdbc.url=jdbc:oracle:thin:@192.168.195.128:1521:tx1
+jdbc.username=esbsg1
+jdbc.password=esbsg1
+#hibernate settings
+#hibernate.dialect=org.hibernate.dialect.DB2Dialect
+hibernate.dialect=org.hibernate.dialect.Oracle9Dialect
+hibernate.show_sql=trues
+hibernate.format_sql=true
+#hibernate.hbm2ddl.auto=create
+hibernate.hbm2ddl.auto=update
+#hibernate.hbm2ddl.auto=validate
+hibernate.jdbc.fetch_size=50
+hibernate.jdbc.batch_size=30
+hibernate.current_session_context_class=thread
+#hibernate.search.provider=org.hibernate.search.store.FSDirectoryProvider
+#hibernate.search.sourceBase=
+#hibernate.memcached.servers=

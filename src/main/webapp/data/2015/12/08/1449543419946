@@ -1,0 +1,2 @@
+ Cannot add or update a child row: a foreign key constraint fails (`esbsg`.`metadata`, CONSTRAINT `FK13D36B2F56F34AC9` FOREIGN KEY (`CATEGORY_WORD_ID`) REFERENCES `category_word` (`ESGLISG_AB`))
+267783 [http-9090-5] ERROR com.dc.esb.servicegov.rsimport.impl.MetadataXlsxParserImpl - 导入元数据[StmtSndFrqcy]失败

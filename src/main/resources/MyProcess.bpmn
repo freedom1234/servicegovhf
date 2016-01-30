@@ -1,0 +1,1125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+    <itemDefinition id="_approved" structureRef="java.lang.Boolean"/>
+    <itemDefinition id="_commentInput" structureRef="java.lang.String"/>
+    <itemDefinition id="_priorityItem" structureRef="java.lang.String"/>
+    <itemDefinition id="_userId" structureRef="java.lang.String"/>
+
+    <process processType="Private" isExecutable="true" id="com.dc.esb.servicegov.process.metadata" name="CreateMetadata">
+        <property id="approved" itemSubjectRef="_approved"/>
+        <property id="commentInput" itemSubjectRef="_commentInput"/>
+        <property id="userId" itemSubjectRef="_userId" />
+        <!--  nodes  -->
+        <!--  创建原数据节点  -->
+        <startEvent id="_1" name="Start"/>
+        <userTask id="_2" name=" 创建新增元数据任务 ">
+            <ioSpecification>
+                <dataInput id="_2_ContentInput" name="Content"/>
+                <dataInput id="_2_CommentInput" name="Comment"/>
+                <dataInput id="_2_SkippableInput" name="Skippable"/>
+                <dataInput id="_2_TaskNameInput" name="TaskName"/>
+                <dataInput id="_2_GroupIdInput" name="GroupId"/>
+                <dataInput id="_2_PriorityInput" name="Priority"/>
+                <dataOutput id="_2_priorityOutput" name="priority"/>
+                <dataOutput id="_2_approvedOutput" name="approved"/>
+                <inputSet>
+                    <dataInputRefs>_2_ContentInput</dataInputRefs>
+                    <dataInputRefs>_2_CommentInput</dataInputRefs>
+                    <dataInputRefs>_2_SkippableInput</dataInputRefs>
+                    <dataInputRefs>_2_ContentInput</dataInputRefs>
+                    <dataInputRefs>_2_TaskNameInput</dataInputRefs>
+                    <dataInputRefs>_2_GroupIdInput</dataInputRefs>
+                    <dataInputRefs>_2_PriorityInput</dataInputRefs>
+                </inputSet>
+                <outputSet>
+                    <dataOutputRefs>_2_priorityOutput</dataOutputRefs>
+                    <dataOutputRefs>_2_approvedOutput</dataOutputRefs>
+                </outputSet>
+            </ioSpecification>
+            <dataInputAssociation>
+                <sourceRef>map</sourceRef>
+                <targetRef>_2_ContentInput</targetRef>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <sourceRef>commentInput</sourceRef>
+                <targetRef>_2_CommentInput</targetRef>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_SkippableInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression">false</from>
+                    <to xsi:type="tFormalExpression">_2_SkippableInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_ContentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_2_ContentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_TaskNameInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 创建元数据 </from>
+                    <to xsi:type="tFormalExpression">_2_TaskNameInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_GroupIdInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_GroupIdInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_PriorityInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_PriorityInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_2_priorityOutput</sourceRef>
+                <targetRef>priority</targetRef>
+            </dataOutputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_2_approvedOutput</sourceRef>
+                <targetRef>approved</targetRef>
+            </dataOutputAssociation>
+            <potentialOwner>
+                <resourceAssignmentExpression>
+                    <expression>#{userId}</expression>
+                </resourceAssignmentExpression>
+            </potentialOwner>
+        </userTask>
+        <!--  审核元数据节点  -->
+        <userTask id="_3" name=" 创建新增元数据审核任务 ">
+            <ioSpecification>
+                <dataInput id="_3_ContentInput" name="Content"/>
+                <dataInput id="_3_CommentInput" name="Comment"/>
+                <dataInput id="_3_SkippableInput" name="Skippable"/>
+                <dataInput id="_3_TaskNameInput" name="TaskName"/>
+                <dataInput id="_3_GroupIdInput" name="GroupId"/>
+                <dataInput id="_3_PriorityInput" name="Priority"/>
+                <dataOutput id="_3_priorityOutput" name="priority"/>
+                <dataOutput id="_3_approvedOutput" name="approved"/>
+                <inputSet>
+                    <dataInputRefs>_3_ContentInput</dataInputRefs>
+                    <dataInputRefs>_3_CommentInput</dataInputRefs>
+                    <dataInputRefs>_3_SkippableInput</dataInputRefs>
+                    <dataInputRefs>_3_ContentInput</dataInputRefs>
+                    <dataInputRefs>_3_TaskNameInput</dataInputRefs>
+                    <dataInputRefs>_3_GroupIdInput</dataInputRefs>
+                    <dataInputRefs>_3_PriorityInput</dataInputRefs>
+                </inputSet>
+                <outputSet>
+                    <dataOutputRefs>_3_priorityOutput</dataOutputRefs>
+                    <dataOutputRefs>_3_approvedOutput</dataOutputRefs>
+                </outputSet>
+            </ioSpecification>
+            <dataInputAssociation>
+                <sourceRef>map</sourceRef>
+                <targetRef>_3_ContentInput</targetRef>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_CommentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 元数据审核 </from>
+                    <to xsi:type="tFormalExpression">_3_CommentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_SkippableInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression">false</from>
+                    <to xsi:type="tFormalExpression">_3_SkippableInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_ContentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_ContentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_TaskNameInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 元数据审核 </from>
+                    <to xsi:type="tFormalExpression">_3_TaskNameInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_GroupIdInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_GroupIdInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_PriorityInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_PriorityInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_3_priorityOutput</sourceRef>
+                <targetRef>priority</targetRef>
+            </dataOutputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_3_approvedOutput</sourceRef>
+                <targetRef>approved</targetRef>
+            </dataOutputAssociation>
+            <potentialOwner>
+                <resourceAssignmentExpression>
+                    <formalExpression>admin</formalExpression>
+                </resourceAssignmentExpression>
+            </potentialOwner>
+        </userTask>
+
+        <scriptTask id="_4" name="Check Approved" scriptFormat="http://www.java.com/java">
+            <script>
+                System.out.println(approved);
+            </script>
+        </scriptTask>
+
+        <exclusiveGateway id="_5" name="Gateway" gatewayDirection="Diverging" />
+        <exclusiveGateway id="_6" name="Gateway" gatewayDirection="Converging" />
+        <endEvent id="_7" name="End">
+            <terminateEventDefinition/>
+        </endEvent>
+        <!--  connections  -->
+        <sequenceFlow id="_1-_6" sourceRef="_1" targetRef="_6"/>
+        <sequenceFlow id="_6-_2" sourceRef="_6" targetRef="_2"/>
+        <sequenceFlow id="_2-_3" sourceRef="_2" targetRef="_3"/>
+        <sequenceFlow id="_3-_4" sourceRef="_3" targetRef="_4"/>
+        <sequenceFlow id="_4-_5" sourceRef="_4" targetRef="_5"/>
+        <sequenceFlow id="_5-_7" sourceRef="_5" targetRef="_7">
+            <conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return (approved);</conditionExpression>
+        </sequenceFlow>
+        <sequenceFlow id="_5-_6" sourceRef="_5" targetRef="_6">
+            <conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return (!approved);</conditionExpression>
+        </sequenceFlow>
+    </process>
+
+    <process processType="Private" isExecutable="true" id="com.dc.esb.servicegov.process.service" name="CreateService">
+        <property id="approved" itemSubjectRef="_approved"/>
+        <property id="commentInput" itemSubjectRef="_commentInput"/>
+        <property id="userId" itemSubjectRef="_userId" />
+        <!--  nodes  -->
+        <!--  创建原数据节点  -->
+        <startEvent id="_1" name="Start"/>
+        <userTask id="_2" name="接口需求上传任务">
+            <ioSpecification>
+                <dataInput id="_2_ContentInput" name="Content"/>
+                <dataInput id="_2_CommentInput" name="Comment"/>
+                <dataInput id="_2_SkippableInput" name="Skippable"/>
+                <dataInput id="_2_TaskNameInput" name="TaskName"/>
+                <dataInput id="_2_GroupIdInput" name="GroupId"/>
+                <dataInput id="_2_PriorityInput" name="Priority"/>
+                <dataOutput id="_2_priorityOutput" name="priority"/>
+                <dataOutput id="_2_approvedOutput" name="approved"/>
+                <inputSet>
+                    <dataInputRefs>_2_ContentInput</dataInputRefs>
+                    <dataInputRefs>_2_CommentInput</dataInputRefs>
+                    <dataInputRefs>_2_SkippableInput</dataInputRefs>
+                    <dataInputRefs>_2_ContentInput</dataInputRefs>
+                    <dataInputRefs>_2_TaskNameInput</dataInputRefs>
+                    <dataInputRefs>_2_GroupIdInput</dataInputRefs>
+                    <dataInputRefs>_2_PriorityInput</dataInputRefs>
+                </inputSet>
+                <outputSet>
+                    <dataOutputRefs>_2_priorityOutput</dataOutputRefs>
+                    <dataOutputRefs>_2_approvedOutput</dataOutputRefs>
+                </outputSet>
+            </ioSpecification>
+            <dataInputAssociation>
+                <sourceRef>map</sourceRef>
+                <targetRef>_2_ContentInput</targetRef>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <sourceRef>commentInput</sourceRef>
+                <targetRef>_2_CommentInput</targetRef>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_SkippableInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression">false</from>
+                    <to xsi:type="tFormalExpression">_2_SkippableInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_ContentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_2_ContentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_TaskNameInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression">接口需求上传</from>
+                    <to xsi:type="tFormalExpression">_2_TaskNameInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_GroupIdInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_GroupIdInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_PriorityInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_PriorityInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_2_priorityOutput</sourceRef>
+                <targetRef>priority</targetRef>
+            </dataOutputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_2_approvedOutput</sourceRef>
+                <targetRef>approved</targetRef>
+            </dataOutputAssociation>
+            <potentialOwner>
+                <resourceAssignmentExpression>
+                    <expression>#{userId}</expression>
+                </resourceAssignmentExpression>
+            </potentialOwner>
+        </userTask>
+        <!-- 审核元数据节点 -->
+        <userTask id="_3" name="接口定义任务">
+            <ioSpecification>
+                <dataInput id="_3_ContentInput" name="Content"/>
+                <dataInput id="_3_CommentInput" name="Comment"/>
+                <dataInput id="_3_SkippableInput" name="Skippable"/>
+                <dataInput id="_3_TaskNameInput" name="TaskName"/>
+                <dataInput id="_3_GroupIdInput" name="GroupId"/>
+                <dataInput id="_3_PriorityInput" name="Priority"/>
+                <dataOutput id="_3_priorityOutput" name="priority"/>
+                <dataOutput id="_3_approvedOutput" name="approved"/>
+                <inputSet>
+                    <dataInputRefs>_3_ContentInput</dataInputRefs>
+                    <dataInputRefs>_3_CommentInput</dataInputRefs>
+                    <dataInputRefs>_3_SkippableInput</dataInputRefs>
+                    <dataInputRefs>_3_ContentInput</dataInputRefs>
+                    <dataInputRefs>_3_TaskNameInput</dataInputRefs>
+                    <dataInputRefs>_3_GroupIdInput</dataInputRefs>
+                    <dataInputRefs>_3_PriorityInput</dataInputRefs>
+                </inputSet>
+                <outputSet>
+                    <dataOutputRefs>_3_priorityOutput</dataOutputRefs>
+                    <dataOutputRefs>_3_approvedOutput</dataOutputRefs>
+                </outputSet>
+            </ioSpecification>
+            <dataInputAssociation>
+                <sourceRef>map</sourceRef>
+                <targetRef>_3_ContentInput</targetRef>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_CommentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 接口定义 </from>
+                    <to xsi:type="tFormalExpression">_3_CommentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_SkippableInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression">false</from>
+                    <to xsi:type="tFormalExpression">_3_SkippableInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_ContentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_ContentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_TaskNameInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 接口定义 </from>
+                    <to xsi:type="tFormalExpression">_3_TaskNameInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_GroupIdInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_GroupIdInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_PriorityInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_PriorityInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_3_priorityOutput</sourceRef>
+                <targetRef>priority</targetRef>
+            </dataOutputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_3_approvedOutput</sourceRef>
+                <targetRef>approved</targetRef>
+            </dataOutputAssociation>
+            <potentialOwner>
+                <resourceAssignmentExpression>
+                    <formalExpression>admin</formalExpression>
+                </resourceAssignmentExpression>
+            </potentialOwner>
+        </userTask>
+
+        <userTask id="_4" name="服务定义任务">
+            <ioSpecification>
+                <dataInput id="_2_ContentInput" name="Content"/>
+                <dataInput id="_2_CommentInput" name="Comment"/>
+                <dataInput id="_2_SkippableInput" name="Skippable"/>
+                <dataInput id="_2_TaskNameInput" name="TaskName"/>
+                <dataInput id="_2_GroupIdInput" name="GroupId"/>
+                <dataInput id="_2_PriorityInput" name="Priority"/>
+                <dataOutput id="_2_priorityOutput" name="priority"/>
+                <dataOutput id="_2_approvedOutput" name="approved"/>
+                <inputSet>
+                    <dataInputRefs>_2_ContentInput</dataInputRefs>
+                    <dataInputRefs>_2_CommentInput</dataInputRefs>
+                    <dataInputRefs>_2_SkippableInput</dataInputRefs>
+                    <dataInputRefs>_2_ContentInput</dataInputRefs>
+                    <dataInputRefs>_2_TaskNameInput</dataInputRefs>
+                    <dataInputRefs>_2_GroupIdInput</dataInputRefs>
+                    <dataInputRefs>_2_PriorityInput</dataInputRefs>
+                </inputSet>
+                <outputSet>
+                    <dataOutputRefs>_2_priorityOutput</dataOutputRefs>
+                    <dataOutputRefs>_2_approvedOutput</dataOutputRefs>
+                </outputSet>
+            </ioSpecification>
+            <dataInputAssociation>
+                <sourceRef>map</sourceRef>
+                <targetRef>_2_ContentInput</targetRef>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <sourceRef>commentInput</sourceRef>
+                <targetRef>_2_CommentInput</targetRef>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_SkippableInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression">false</from>
+                    <to xsi:type="tFormalExpression">_2_SkippableInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_ContentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_2_ContentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_TaskNameInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 服务定义 </from>
+                    <to xsi:type="tFormalExpression">_2_TaskNameInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_GroupIdInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_GroupIdInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_2_PriorityInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_PriorityInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_2_priorityOutput</sourceRef>
+                <targetRef>priority</targetRef>
+            </dataOutputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_2_approvedOutput</sourceRef>
+                <targetRef>approved</targetRef>
+            </dataOutputAssociation>
+            <potentialOwner>
+                <resourceAssignmentExpression>
+                    <expression>#{userId}</expression>
+                </resourceAssignmentExpression>
+            </potentialOwner>
+        </userTask>
+
+        <userTask id="_5" name="服务审核">
+            <ioSpecification>
+                <dataInput id="_3_ContentInput" name="Content"/>
+                <dataInput id="_3_CommentInput" name="Comment"/>
+                <dataInput id="_3_SkippableInput" name="Skippable"/>
+                <dataInput id="_3_TaskNameInput" name="TaskName"/>
+                <dataInput id="_3_GroupIdInput" name="GroupId"/>
+                <dataInput id="_3_PriorityInput" name="Priority"/>
+                <dataOutput id="_3_priorityOutput" name="priority"/>
+                <dataOutput id="_3_approvedOutput" name="approved"/>
+                <inputSet>
+                    <dataInputRefs>_3_ContentInput</dataInputRefs>
+                    <dataInputRefs>_3_CommentInput</dataInputRefs>
+                    <dataInputRefs>_3_SkippableInput</dataInputRefs>
+                    <dataInputRefs>_3_ContentInput</dataInputRefs>
+                    <dataInputRefs>_3_TaskNameInput</dataInputRefs>
+                    <dataInputRefs>_3_GroupIdInput</dataInputRefs>
+                    <dataInputRefs>_3_PriorityInput</dataInputRefs>
+                </inputSet>
+                <outputSet>
+                    <dataOutputRefs>_3_priorityOutput</dataOutputRefs>
+                    <dataOutputRefs>_3_approvedOutput</dataOutputRefs>
+                </outputSet>
+            </ioSpecification>
+            <dataInputAssociation>
+                <sourceRef>map</sourceRef>
+                <targetRef>_3_ContentInput</targetRef>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_CommentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 服务审核 </from>
+                    <to xsi:type="tFormalExpression">_3_CommentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_SkippableInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression">false</from>
+                    <to xsi:type="tFormalExpression">_3_SkippableInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_ContentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_ContentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_TaskNameInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 服务审核 </from>
+                    <to xsi:type="tFormalExpression">_3_TaskNameInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_GroupIdInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_GroupIdInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_PriorityInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_PriorityInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_3_priorityOutput</sourceRef>
+                <targetRef>priority</targetRef>
+            </dataOutputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_3_approvedOutput</sourceRef>
+                <targetRef>approved</targetRef>
+            </dataOutputAssociation>
+            <potentialOwner>
+                <resourceAssignmentExpression>
+                    <formalExpression>admin</formalExpression>
+                </resourceAssignmentExpression>
+            </potentialOwner>
+        </userTask>
+
+        <userTask id="_6" name="服务发布">
+            <ioSpecification>
+                <dataInput id="_3_ContentInput" name="Content"/>
+                <dataInput id="_3_CommentInput" name="Comment"/>
+                <dataInput id="_3_SkippableInput" name="Skippable"/>
+                <dataInput id="_3_TaskNameInput" name="TaskName"/>
+                <dataInput id="_3_GroupIdInput" name="GroupId"/>
+                <dataInput id="_3_PriorityInput" name="Priority"/>
+                <dataOutput id="_3_priorityOutput" name="priority"/>
+                <dataOutput id="_3_approvedOutput" name="approved"/>
+                <inputSet>
+                    <dataInputRefs>_3_ContentInput</dataInputRefs>
+                    <dataInputRefs>_3_CommentInput</dataInputRefs>
+                    <dataInputRefs>_3_SkippableInput</dataInputRefs>
+                    <dataInputRefs>_3_ContentInput</dataInputRefs>
+                    <dataInputRefs>_3_TaskNameInput</dataInputRefs>
+                    <dataInputRefs>_3_GroupIdInput</dataInputRefs>
+                    <dataInputRefs>_3_PriorityInput</dataInputRefs>
+                </inputSet>
+                <outputSet>
+                    <dataOutputRefs>_3_priorityOutput</dataOutputRefs>
+                    <dataOutputRefs>_3_approvedOutput</dataOutputRefs>
+                </outputSet>
+            </ioSpecification>
+            <dataInputAssociation>
+                <sourceRef>map</sourceRef>
+                <targetRef>_3_ContentInput</targetRef>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_CommentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 服务发布 </from>
+                    <to xsi:type="tFormalExpression">_3_CommentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_SkippableInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression">false</from>
+                    <to xsi:type="tFormalExpression">_3_SkippableInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_ContentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_ContentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_TaskNameInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 服务发布 </from>
+                    <to xsi:type="tFormalExpression">_3_TaskNameInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_GroupIdInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_GroupIdInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_PriorityInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_PriorityInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_3_priorityOutput</sourceRef>
+                <targetRef>priority</targetRef>
+            </dataOutputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_3_approvedOutput</sourceRef>
+                <targetRef>approved</targetRef>
+            </dataOutputAssociation>
+            <potentialOwner>
+                <resourceAssignmentExpression>
+                    <formalExpression>admin</formalExpression>
+                </resourceAssignmentExpression>
+            </potentialOwner>
+        </userTask>
+
+        <userTask id="_7" name="服务开发">
+            <ioSpecification>
+                <dataInput id="_3_ContentInput" name="Content"/>
+                <dataInput id="_3_CommentInput" name="Comment"/>
+                <dataInput id="_3_SkippableInput" name="Skippable"/>
+                <dataInput id="_3_TaskNameInput" name="TaskName"/>
+                <dataInput id="_3_GroupIdInput" name="GroupId"/>
+                <dataInput id="_3_PriorityInput" name="Priority"/>
+                <dataOutput id="_3_priorityOutput" name="priority"/>
+                <dataOutput id="_3_approvedOutput" name="approved"/>
+                <inputSet>
+                    <dataInputRefs>_3_ContentInput</dataInputRefs>
+                    <dataInputRefs>_3_CommentInput</dataInputRefs>
+                    <dataInputRefs>_3_SkippableInput</dataInputRefs>
+                    <dataInputRefs>_3_ContentInput</dataInputRefs>
+                    <dataInputRefs>_3_TaskNameInput</dataInputRefs>
+                    <dataInputRefs>_3_GroupIdInput</dataInputRefs>
+                    <dataInputRefs>_3_PriorityInput</dataInputRefs>
+                </inputSet>
+                <outputSet>
+                    <dataOutputRefs>_3_priorityOutput</dataOutputRefs>
+                    <dataOutputRefs>_3_approvedOutput</dataOutputRefs>
+                </outputSet>
+            </ioSpecification>
+            <dataInputAssociation>
+                <sourceRef>map</sourceRef>
+                <targetRef>_3_ContentInput</targetRef>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_CommentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 服务开发 </from>
+                    <to xsi:type="tFormalExpression">_3_CommentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_SkippableInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression">false</from>
+                    <to xsi:type="tFormalExpression">_3_SkippableInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_ContentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_ContentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_TaskNameInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 服务开发 </from>
+                    <to xsi:type="tFormalExpression">_3_TaskNameInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_GroupIdInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_GroupIdInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_PriorityInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_PriorityInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_3_priorityOutput</sourceRef>
+                <targetRef>priority</targetRef>
+            </dataOutputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_3_approvedOutput</sourceRef>
+                <targetRef>approved</targetRef>
+            </dataOutputAssociation>
+            <potentialOwner>
+                <resourceAssignmentExpression>
+                    <formalExpression>admin</formalExpression>
+                </resourceAssignmentExpression>
+            </potentialOwner>
+        </userTask>
+
+        <userTask id="_8" name="服务测试">
+            <ioSpecification>
+                <dataInput id="_3_ContentInput" name="Content"/>
+                <dataInput id="_3_CommentInput" name="Comment"/>
+                <dataInput id="_3_SkippableInput" name="Skippable"/>
+                <dataInput id="_3_TaskNameInput" name="TaskName"/>
+                <dataInput id="_3_GroupIdInput" name="GroupId"/>
+                <dataInput id="_3_PriorityInput" name="Priority"/>
+                <dataOutput id="_3_priorityOutput" name="priority"/>
+                <dataOutput id="_3_approvedOutput" name="approved"/>
+                <inputSet>
+                    <dataInputRefs>_3_ContentInput</dataInputRefs>
+                    <dataInputRefs>_3_CommentInput</dataInputRefs>
+                    <dataInputRefs>_3_SkippableInput</dataInputRefs>
+                    <dataInputRefs>_3_ContentInput</dataInputRefs>
+                    <dataInputRefs>_3_TaskNameInput</dataInputRefs>
+                    <dataInputRefs>_3_GroupIdInput</dataInputRefs>
+                    <dataInputRefs>_3_PriorityInput</dataInputRefs>
+                </inputSet>
+                <outputSet>
+                    <dataOutputRefs>_3_priorityOutput</dataOutputRefs>
+                    <dataOutputRefs>_3_approvedOutput</dataOutputRefs>
+                </outputSet>
+            </ioSpecification>
+            <dataInputAssociation>
+                <sourceRef>map</sourceRef>
+                <targetRef>_3_ContentInput</targetRef>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_CommentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 服务测试 </from>
+                    <to xsi:type="tFormalExpression">_3_CommentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_SkippableInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression">false</from>
+                    <to xsi:type="tFormalExpression">_3_SkippableInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_ContentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_ContentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_TaskNameInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 服务测试 </from>
+                    <to xsi:type="tFormalExpression">_3_TaskNameInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_GroupIdInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_GroupIdInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_PriorityInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_PriorityInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_3_priorityOutput</sourceRef>
+                <targetRef>priority</targetRef>
+            </dataOutputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_3_approvedOutput</sourceRef>
+                <targetRef>approved</targetRef>
+            </dataOutputAssociation>
+            <potentialOwner>
+                <resourceAssignmentExpression>
+                    <formalExpression>admin</formalExpression>
+                </resourceAssignmentExpression>
+            </potentialOwner>
+        </userTask>
+
+        <userTask id="_9" name="服务上线">
+            <ioSpecification>
+                <dataInput id="_3_ContentInput" name="Content"/>
+                <dataInput id="_3_CommentInput" name="Comment"/>
+                <dataInput id="_3_SkippableInput" name="Skippable"/>
+                <dataInput id="_3_TaskNameInput" name="TaskName"/>
+                <dataInput id="_3_GroupIdInput" name="GroupId"/>
+                <dataInput id="_3_PriorityInput" name="Priority"/>
+                <dataOutput id="_3_priorityOutput" name="priority"/>
+                <dataOutput id="_3_approvedOutput" name="approved"/>
+                <inputSet>
+                    <dataInputRefs>_3_ContentInput</dataInputRefs>
+                    <dataInputRefs>_3_CommentInput</dataInputRefs>
+                    <dataInputRefs>_3_SkippableInput</dataInputRefs>
+                    <dataInputRefs>_3_ContentInput</dataInputRefs>
+                    <dataInputRefs>_3_TaskNameInput</dataInputRefs>
+                    <dataInputRefs>_3_GroupIdInput</dataInputRefs>
+                    <dataInputRefs>_3_PriorityInput</dataInputRefs>
+                </inputSet>
+                <outputSet>
+                    <dataOutputRefs>_3_priorityOutput</dataOutputRefs>
+                    <dataOutputRefs>_3_approvedOutput</dataOutputRefs>
+                </outputSet>
+            </ioSpecification>
+            <dataInputAssociation>
+                <sourceRef>map</sourceRef>
+                <targetRef>_3_ContentInput</targetRef>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_CommentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 服务上线 </from>
+                    <to xsi:type="tFormalExpression">_3_CommentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_SkippableInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression">false</from>
+                    <to xsi:type="tFormalExpression">_3_SkippableInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_ContentInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_ContentInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_TaskNameInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"> 服务上线 </from>
+                    <to xsi:type="tFormalExpression">_3_TaskNameInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_GroupIdInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_GroupIdInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataInputAssociation>
+                <targetRef>_3_PriorityInput</targetRef>
+                <assignment>
+                    <from xsi:type="tFormalExpression"></from>
+                    <to xsi:type="tFormalExpression">_3_PriorityInput</to>
+                </assignment>
+            </dataInputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_3_priorityOutput</sourceRef>
+                <targetRef>priority</targetRef>
+            </dataOutputAssociation>
+            <dataOutputAssociation>
+                <sourceRef>_3_approvedOutput</sourceRef>
+                <targetRef>approved</targetRef>
+            </dataOutputAssociation>
+            <potentialOwner>
+                <resourceAssignmentExpression>
+                    <formalExpression>admin</formalExpression>
+                </resourceAssignmentExpression>
+            </potentialOwner>
+        </userTask>
+
+
+        <!-- 服务审核之后的分支节点 -->
+        <exclusiveGateway id="_11" name="Gateway" gatewayDirection="Diverging" />
+        <!-- 服务审核之后分支回退的聚合节点，聚合从开始到接口需求录入，和审核不通过到接口需求录入。 -->
+        <exclusiveGateway id="_12" name="Gateway" gatewayDirection="Converging" />
+        <endEvent id="_13" name="End">
+            <terminateEventDefinition/>
+        </endEvent>
+        <!--  connections  -->
+        <sequenceFlow id="_1-_12" sourceRef="_1" targetRef="_12"/>
+        <sequenceFlow id="_12-_2" sourceRef="_12" targetRef="_2"/>
+        <sequenceFlow id="_2-_3" sourceRef="_2" targetRef="_3"/>
+        <sequenceFlow id="_3-_4" sourceRef="_3" targetRef="_4"/>
+        <sequenceFlow id="_4-_5" sourceRef="_4" targetRef="_5"/>
+        <sequenceFlow id="_5-_11" sourceRef="_5" targetRef="_11"/>
+        <sequenceFlow id="_6-_7" sourceRef="_6" targetRef="_7"/>
+        <sequenceFlow id="_7-_8" sourceRef="_7" targetRef="_8"/>
+        <sequenceFlow id="_8-_9" sourceRef="_8" targetRef="_9"/>
+        <sequenceFlow id="_9-_13" sourceRef="_9" targetRef="_13"/>
+
+        <sequenceFlow id="_11-_6" sourceRef="_11" targetRef="_6">
+            <conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return (approved);</conditionExpression>
+        </sequenceFlow>
+        <sequenceFlow id="_11-_12" sourceRef="_11" targetRef="_12">
+            <conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return (!approved);</conditionExpression>
+        </sequenceFlow>
+    </process>
+
+    <process processType="Private" isExecutable="true" id="com.dc.esb.servicegov.process.sgenum" name="CreateSgEnum">
+    	<property id="approved" itemSubjectRef="_approved"/>
+    	<property id="commentInput" itemSubjectRef="_commentInput"/>
+    	<property id="userId" itemSubjectRef="_userId" />
+    	<!--  nodes  -->
+    	<!--  创建原数据节点  -->
+    	<startEvent id="_1" name="Start"/>
+    	<userTask id="_2" name=" 创建新增公共代码任务 ">
+    		<ioSpecification>
+    			<dataInput id="_2_ContentInput" name="Content"/>
+    			<dataInput id="_2_CommentInput" name="Comment"/>
+    			<dataInput id="_2_SkippableInput" name="Skippable"/>
+    			<dataInput id="_2_TaskNameInput" name="TaskName"/>
+    			<dataInput id="_2_GroupIdInput" name="GroupId"/>
+    			<dataInput id="_2_PriorityInput" name="Priority"/>
+    			<dataOutput id="_2_priorityOutput" name="priority"/>
+    			<dataOutput id="_2_approvedOutput" name="approved"/>
+    			<inputSet>
+    				<dataInputRefs>_2_ContentInput</dataInputRefs>
+    				<dataInputRefs>_2_CommentInput</dataInputRefs>
+    				<dataInputRefs>_2_SkippableInput</dataInputRefs>
+    				<dataInputRefs>_2_ContentInput</dataInputRefs>
+    				<dataInputRefs>_2_TaskNameInput</dataInputRefs>
+    				<dataInputRefs>_2_GroupIdInput</dataInputRefs>
+    				<dataInputRefs>_2_PriorityInput</dataInputRefs>
+    			</inputSet>
+    			<outputSet>
+    				<dataOutputRefs>_2_priorityOutput</dataOutputRefs>
+    				<dataOutputRefs>_2_approvedOutput</dataOutputRefs>
+    			</outputSet>
+    		</ioSpecification>
+    		<dataInputAssociation>
+    			<sourceRef>map</sourceRef>
+    			<targetRef>_2_ContentInput</targetRef>
+    		</dataInputAssociation>
+    		<dataInputAssociation>
+    			<sourceRef>commentInput</sourceRef>
+    			<targetRef>_2_CommentInput</targetRef>
+    		</dataInputAssociation>
+    		<dataInputAssociation>
+    			<targetRef>_2_SkippableInput</targetRef>
+    			<assignment>
+    				<from xsi:type="tFormalExpression">false</from>
+    				<to xsi:type="tFormalExpression">_2_SkippableInput</to>
+    			</assignment>
+    		</dataInputAssociation>
+    		<dataInputAssociation>
+    			<targetRef>_2_ContentInput</targetRef>
+    			<assignment>
+    				<from xsi:type="tFormalExpression"></from>
+    				<to xsi:type="tFormalExpression">_2_ContentInput</to>
+    			</assignment>
+    		</dataInputAssociation>
+    		<dataInputAssociation>
+    			<targetRef>_2_TaskNameInput</targetRef>
+    			<assignment>
+    				<from xsi:type="tFormalExpression"> 创建公共代码 </from>
+    				<to xsi:type="tFormalExpression">_2_TaskNameInput</to>
+    			</assignment>
+    		</dataInputAssociation>
+    		<dataInputAssociation>
+    			<targetRef>_2_GroupIdInput</targetRef>
+    			<assignment>
+    				<from xsi:type="tFormalExpression"></from>
+    				<to xsi:type="tFormalExpression">_3_GroupIdInput</to>
+    			</assignment>
+    		</dataInputAssociation>
+    		<dataInputAssociation>
+    			<targetRef>_2_PriorityInput</targetRef>
+    			<assignment>
+    				<from xsi:type="tFormalExpression"></from>
+    				<to xsi:type="tFormalExpression">_3_PriorityInput</to>
+    			</assignment>
+    		</dataInputAssociation>
+    		<dataOutputAssociation>
+    			<sourceRef>_2_priorityOutput</sourceRef>
+    			<targetRef>priority</targetRef>
+    		</dataOutputAssociation>
+    		<dataOutputAssociation>
+    			<sourceRef>_2_approvedOutput</sourceRef>
+    			<targetRef>approved</targetRef>
+    		</dataOutputAssociation>
+    		<potentialOwner>
+    			<resourceAssignmentExpression>
+    				<expression>#{userId}</expression>
+    			</resourceAssignmentExpression>
+    		</potentialOwner>
+    	</userTask>
+    	<!--  审核公共代码节点  -->
+    	<userTask id="_3" name=" 创建新增公共代码审核任务 ">
+    		<ioSpecification>
+    			<dataInput id="_3_ContentInput" name="Content"/>
+    			<dataInput id="_3_CommentInput" name="Comment"/>
+    			<dataInput id="_3_SkippableInput" name="Skippable"/>
+    			<dataInput id="_3_TaskNameInput" name="TaskName"/>
+    			<dataInput id="_3_GroupIdInput" name="GroupId"/>
+    			<dataInput id="_3_PriorityInput" name="Priority"/>
+    			<dataOutput id="_3_priorityOutput" name="priority"/>
+    			<dataOutput id="_3_approvedOutput" name="approved"/>
+    			<inputSet>
+    				<dataInputRefs>_3_ContentInput</dataInputRefs>
+    				<dataInputRefs>_3_CommentInput</dataInputRefs>
+    				<dataInputRefs>_3_SkippableInput</dataInputRefs>
+    				<dataInputRefs>_3_ContentInput</dataInputRefs>
+    				<dataInputRefs>_3_TaskNameInput</dataInputRefs>
+    				<dataInputRefs>_3_GroupIdInput</dataInputRefs>
+    				<dataInputRefs>_3_PriorityInput</dataInputRefs>
+    			</inputSet>
+    			<outputSet>
+    				<dataOutputRefs>_3_priorityOutput</dataOutputRefs>
+    				<dataOutputRefs>_3_approvedOutput</dataOutputRefs>
+    			</outputSet>
+    		</ioSpecification>
+    		<dataInputAssociation>
+    			<sourceRef>map</sourceRef>
+    			<targetRef>_3_ContentInput</targetRef>
+    		</dataInputAssociation>
+    		<dataInputAssociation>
+    			<targetRef>_3_CommentInput</targetRef>
+    			<assignment>
+    				<from xsi:type="tFormalExpression" > 公共代码审核 </from>
+    				<to xsi:type="tFormalExpression">_3_CommentInput</to>
+    			</assignment>
+    		</dataInputAssociation>
+    		<dataInputAssociation>
+    			<targetRef>_3_SkippableInput</targetRef>
+    			<assignment>
+    				<from xsi:type="tFormalExpression">false</from>
+    				<to xsi:type="tFormalExpression">_3_SkippableInput</to>
+    			</assignment>
+    		</dataInputAssociation>
+    		<dataInputAssociation>
+    			<targetRef>_3_ContentInput</targetRef>
+    			<assignment>
+    				<from xsi:type="tFormalExpression"></from>
+    				<to xsi:type="tFormalExpression">_3_ContentInput</to>
+    			</assignment>
+    		</dataInputAssociation>
+    		<dataInputAssociation>
+    			<targetRef>_3_TaskNameInput</targetRef>
+    			<assignment>
+    				<from xsi:type="tFormalExpression"> 公共代码审核 </from>
+    				<to xsi:type="tFormalExpression">_3_TaskNameInput</to>
+    			</assignment>
+    		</dataInputAssociation>
+    		<dataInputAssociation>
+    			<targetRef>_3_GroupIdInput</targetRef>
+    			<assignment>
+    				<from xsi:type="tFormalExpression"></from>
+    				<to xsi:type="tFormalExpression">_3_GroupIdInput</to>
+    			</assignment>
+    		</dataInputAssociation>
+    		<dataInputAssociation>
+    			<targetRef>_3_PriorityInput</targetRef>
+    			<assignment>
+    				<from xsi:type="tFormalExpression"></from>
+    				<to xsi:type="tFormalExpression">_3_PriorityInput</to>
+    			</assignment>
+    		</dataInputAssociation>
+    		<dataOutputAssociation>
+    			<sourceRef>_3_priorityOutput</sourceRef>
+    			<targetRef>priority</targetRef>
+    		</dataOutputAssociation>
+    		<dataOutputAssociation>
+    			<sourceRef>_3_approvedOutput</sourceRef>
+    			<targetRef>approved</targetRef>
+    		</dataOutputAssociation>
+    		<potentialOwner>
+    			<resourceAssignmentExpression>
+    				<formalExpression>admin</formalExpression>
+    			</resourceAssignmentExpression>
+    		</potentialOwner>
+    	</userTask>
+
+    	<scriptTask id="_4" name="Check Approved" scriptFormat="http://www.java.com/java">
+    		<script>
+    			System.out.println(approved);
+    		</script>
+    	</scriptTask>
+
+    	<exclusiveGateway id="_5" name="Gateway" gatewayDirection="Diverging" />
+    	<exclusiveGateway id="_6" name="Gateway" gatewayDirection="Converging" />
+    	<endEvent id="_7" name="End">
+    		<terminateEventDefinition/>
+    	</endEvent>
+    	<!--  connections  -->
+    	<sequenceFlow id="_1-_6" sourceRef="_1" targetRef="_6"/>
+    	<sequenceFlow id="_6-_2" sourceRef="_6" targetRef="_2"/>
+    	<sequenceFlow id="_2-_3" sourceRef="_2" targetRef="_3"/>
+    	<sequenceFlow id="_3-_4" sourceRef="_3" targetRef="_4"/>
+    	<sequenceFlow id="_4-_5" sourceRef="_4" targetRef="_5"/>
+    	<sequenceFlow id="_5-_7" sourceRef="_5" targetRef="_7">
+    		<conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return (approved);</conditionExpression>
+    	</sequenceFlow>
+    	<sequenceFlow id="_5-_6" sourceRef="_5" targetRef="_6">
+    		<conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return (!approved);</conditionExpression>
+    	</sequenceFlow>
+    </process>
+</definitions>

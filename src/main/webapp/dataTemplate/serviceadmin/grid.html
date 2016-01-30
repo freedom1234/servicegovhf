@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv ="X-UA-Compatible" content ="IE=edge" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>列表页</title>
+<link rel="stylesheet" type="text/css" href="/resources/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="/resources/themes/icon.css">
+<link href="/resources/css/ui.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/resources/js/jquery.min.js"></script> 
+<script type="text/javascript" src="/resources/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/resources/js/ui.js"></script>
+</head>
+
+<body >
+<fieldset>
+ <legend>条件搜索</legend>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+      <th>服务一级目录</th>
+    <td> <input class="easyui-textbox" disabled="disabled"  type="text" name="name" ></td>
+   
+  <th>服务二级目录</th>
+    <td> <input class="easyui-textbox" disabled="disabled"  type="text" name="name" >
+      </td>
+  <th>服务三级目录</th>
+    <td> <input class="easyui-textbox" disabled="disabled"  type="text" name="name" ></td>
+  </tr>
+  <tr>
+     <th>服务代码</th>
+    <td><input class="easyui-textbox" type="text" name="name" ></td>
+    <th>服务名称</th>
+    <td><input class="easyui-textbox" type="text" name="name" ></td>
+     <th> 服务功能描述</th>
+    <td> <input class="easyui-textbox"  type="text" name="name" ></td>
+  </tr>
+  <tr>
+     <th>服务关键词</th>
+    <td><input class="easyui-textbox" type="text" name="name" ></td>
+    <th>&nbsp;</th>
+    <td>&nbsp;</td>
+     <th>&nbsp;</th>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td align="right"><a href="#" class="easyui-linkbutton"  iconCls="icon-search">搜索</a></td>
+  </tr>
+</table>
+
+
+</fieldset>
+<table class="easyui-datagrid" title="场景明细" 
+			data-options="rownumbers:true,singleSelect:false,url:'../datagrid_data1.json',method:'get',toolbar:toolbar,pagination:true,
+				pageSize:10" style="height:370px; width:auto;">
+  <thead>
+    <tr>
+          <th data-options="field:'productid',checkbox:true"> </th>
+
+    
+      <th data-options="field:'itemid'">字段1 </th>
+      <th data-options="field:'status'">字段2 </th>
+      <th data-options="field:'listprice',align:'right'">字段3 </th>
+      <th data-options="field:'unitcost',width:80,align:'right'">字段4 </th>
+      <th data-options="field:'attr1'">消费方 </th>
+      <th data-options="field:'status',width:60,align:'center'">字段5 </th>
+      <th data-options="field:'attr1'"> 字段6 </th>
+      <th data-options="field:'attr1'"> 字段7 </th>
+      <th data-options="field:'attr1'">字段8 </th>
+      <th data-options="field:'attr1'">字段9 </th>
+    </tr>
+  </thead>
+</table>
+<div id="w" class="easyui-window" title="" data-options="modal:true,closed:true,iconCls:'icon-add'" style="width:500px;height:200px;padding:10px;">
+		
+</div>
+<script type="text/javascript">
+		var toolbar = [{
+			text:'新增',
+			iconCls:'icon-add',
+			handler:function(){
+					 var content = '<iframe scrolling="auto" frameborder="0"  src="/dataTemplate/serviceadmin/grid2.html" style="width:100%;height:100%;"></iframe>';
+						
+						parent.uiinit.subtab.add({
+							title:'服务场景',
+							content : content	
+						})				
+						parent.uiinit.subtab.add({
+							title:'服务接口SDO',
+							content : ''	
+						})
+						
+						
+						parent.uiinit.subtab.add({
+							title:'服务SLA',
+							content : ''	
+						})							
+				
+						parent.uiinit.subtab.add({
+							title:'服务OLA',
+							content : ''	
+						})	
+						
+						parent.uiinit.subtab.add({
+							title:'服务接口隐射',
+							content : ''	
+						})	
+						
+						parent.k = 0;
+						parent.j = 0;
+						parent.m =0;
+						parent.n =0;
+						parent.q = 0;
+						
+						parent.$('#subtab').tabs('select','服务场景')
+				
+			}
+		},{
+			text:'修改',
+			iconCls:'icon-edit',
+			handler:function(){
+				 var content = '<iframe scrolling="auto" frameborder="0"  src="/dataTemplate/serviceadmin/grid2.html" style="width:100%;height:100%;"></iframe>';
+						
+						parent.uiinit.subtab.add({
+							title:'服务场景',
+							content : content	
+						})				
+						parent.uiinit.subtab.add({
+							title:'服务接口SDO',
+							content : ''	
+						})
+						
+						
+						parent.uiinit.subtab.add({
+							title:'服务SLA',
+							content : ''	
+						})							
+				
+						parent.uiinit.subtab.add({
+							title:'服务OLA',
+							content : ''	
+						})	
+						
+						parent.uiinit.subtab.add({
+							title:'服务接口隐射',
+							content : ''	
+						})	
+						
+						parent.k = 0;
+						parent.j = 0;
+						parent.m =0;
+						parent.n =0;
+						parent.q = 0;
+						parent.$('#subtab').tabs('select','服务场景')
+
+			}
+		},{
+			text:'删除',
+			iconCls:'icon-remove',
+			handler:function(){}
+		},'-',
+		
+		{
+			text:'场景明细',
+			iconCls:'icon-qxfp',
+			handler:function(){
+				
+			}
+		},
+		{
+			text:'提交任务',
+			iconCls:'icon-qxfp',
+			handler:function(){
+				
+			}
+		}];
+	</script> 
+
+</body>
+</html>

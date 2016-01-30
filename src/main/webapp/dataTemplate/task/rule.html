@@ -1,0 +1,39 @@
+<meta http-equiv ="X-UA-Compatible" content ="IE=edge" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<form class="formui">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+      <th align="center">可选择人员</th>
+    <td width="50" align="center">&nbsp;</td>
+    <th align="center">已选择人员</th>
+  </tr>
+  
+  <tr>
+    <th align="center"><select name="select2" id="olddataui" size="10" multiple  style="width:155px;height:160px" panelHeight="auto">
+      <option value="java">节点1</option>
+      <option value="c">节点2</option>
+      <option value="basic">节点3</option>
+      <option value="perl">节点4</option>
+    </select></th>
+    <td align="center" valign="middle"><a href="#" class="easyui-linkbutton"  iconCls="icon-select-add" onClick="uiinit.selectex('olddataui','newdataui')"></a><br>
+<br>
+<br>
+<a href="#" class="easyui-linkbutton"  iconCls="icon-select-remove" onClick="uiinit.selectex('newdataui','olddataui')"></a></td>
+    <td align="center"><select name="select" id="newdataui" size="10" multiple  style="width:155px;height:160px" panelHeight="auto">
+     
+    </select></td>
+  </tr>
+  <tr>
+    <th align="center">&nbsp;</th>
+    <td align="center" valign="middle">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <th colspan="3" class="win-bbar" align="center"><a href="#" class="easyui-linkbutton"  iconCls="icon-cancel" onClick="$('#w').window('close')">取消</a><a href="#" class="easyui-linkbutton"  iconCls="icon-save">保存</a></th>
+   
+    </tr>
+  </table>
+</form>
+
+

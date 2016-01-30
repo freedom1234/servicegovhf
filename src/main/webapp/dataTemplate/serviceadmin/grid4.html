@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv ="X-UA-Compatible" content ="IE=edge" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="/resources/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="/resources/themes/icon.css">
+<link href="/resources/css/ui.css" rel="stylesheet" type="text/css">
+	 <script type="text/javascript" src="/resources/js/jquery.min.js"></script> 
+        <script type="text/javascript" src="/resources/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.edatagrid.js"></script>
+
+<script type="text/javascript" src="/resources/js/ui.js"></script>
+
+</head>
+<body >
+<fieldset>
+ <legend>条件搜索</legend>
+<table border="0" cellspacing="0" cellpadding="0">
+
+  <tr>
+     <th>服务代码</th>
+    <td><input class="easyui-textbox" disabled type="text" name="name" ></td>
+    <th>服务名称</th>
+    <td><input class="easyui-textbox" disabled type="text" name="name" ></td>
+     <th>&nbsp;</th>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th>场景名称</th>
+    <td><input class="easyui-textbox" disabled type="text" name="name" ></td>
+    <th>场景号</th>
+    <td colspan="3"><input class="easyui-textbox"disabled  type="text" name="name2" ></td>
+  </tr>
+  </table>
+
+
+</fieldset>
+	<table class="easyui-datagrid" id="tt" title="OLA指标说明" 
+			data-options="rownumbers:true,singleSelect:false,url:'../datagrid_data1.json',method:'get',toolbar:toolbar,pagination:true,
+				pageSize:10" style="height:370px; width:auto;">
+		<thead>
+			<tr>
+				
+<th field="itemid" width="100" editor="{type:'validatebox',options:{required:true}}">Item ID</th>
+				<th field="productid" width="100" editor="text">Product ID</th>
+				<th field="listprice" width="100" align="right" editor="{type:'numberbox',options:{precision:1}}">List Price</th>
+				<th field="unitcost" width="100" align="right" editor="numberbox">Unit Cost</th>
+				<th field="attr1" width="150" editor="text">Attribute</th>
+			</tr>
+		</thead>
+	</table>
+  <script type="text/javascript">
+		var toolbar = [{
+			text:'新增',
+			iconCls:'icon-add',
+			handler:function(){
+				$('#tt').edatagrid('addRow');
+			}
+		},
+		{
+			text:'删除',
+			iconCls:'icon-remove',
+			handler:function(){
+				$('#tt').edatagrid('destroyRow')
+			}
+		}];
+		$(function(){
+			$('#tt').edatagrid({
+				autoSave:true,
+				saveUrl: '/',
+				updateUrl: '/',
+				destroyUrl: '/'
+			});
+		});
+	</script>   
+  
+
+</body>
+</html>

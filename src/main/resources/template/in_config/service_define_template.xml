@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<esb_xml>
+    <request>
+        <sdoroot>
+            <SYS_HEAD>
+                <SvcId metadataid="SvcId"/>
+                <SvcScnId metadataid="SvcScnId"/>
+                <CnsmSysId metadataid="CnsmSysId"/>
+                <ChnlType metadataid="ChnlType"/>
+                <SrcSysId metadataid="SrcSysId"/>
+                <CnsmSysSeqNo metadataid="CnsmSysSeqNo"/>
+                <SrcSysSeqNo metadataid="SrcSysSeqNo"/>
+                <Mac metadataid="Mac"/>
+                <MacOrgId metadataid="MacOrgId"/>
+                <TranMode metadataid="TranMode"/>
+                <TranDate metadataid="TranDate"/>
+                <TranTime metadataid="TranTime"/>
+                <TmnlNo metadataid="TmnlNo"/>
+                <SrcSySysnlNo metadataid="SrcSySysnlNo"/>
+                <CnsmSysSvrId metadataid="CnsmSysSvrId"/>
+                <SrcSysSvrId metadataid="SrcSysSvrId"/>
+                <UserLang metadataid="UserLang"/>
+            </SYS_HEAD>
+
+            <APP_HEAD>
+                <TellerId metadataid="TellerId"/>
+                <BranchId metadataid="BranchId"/>
+                <TlrPswd metadataid="TlrPswd"/>
+                <TlrLvl metadataid="TlrLvl"/>
+                <TlrType metadataid="TlrType"/>
+                <ChkFlag metadataid="ChkFlag"/>
+                <AuthFlag metadataid="AuthFlag"/>
+                <AuthTlrId metadataid="AuthTlrId"/>
+                <AuthBrId metadataid="AuthBrId"/>
+                <AuthTlrPswd metadataid="AuthTlrPswd"/>
+            </APP_HEAD>
+            ${request}$
+        </sdoroot>
+    </request>
+    <response>
+        <sdoroot>
+            <SYS_HEAD>
+                <SvcId metadataid="SvcId"/>
+                <SvcScnId metadataid="SvcScnId"/>
+                <CnsmSysId metadataid="CnsmSysId"/>
+                <PrvdSysId metadataid="PrvdSysId"/>
+                <CnsmSysSeqNo metadataid="CnsmSysSeqNo"/>
+                <PrvdSysSeqNo metadataid="PrvdSysSeqNo"/>
+                <Mac metadataid="Mac"/>
+                <MacOrgId metadataid="MacOrgId"/>
+                <TranDate metadataid="TranDate"/>
+                <TranTime metadataid="TranTime"/>
+                <TranRetSt metadataid="TranRetSt"/>
+                <array>
+                    <RetInf metadataid="RetInf" type="array">
+                        <sdo>
+                            <RetCode metadataid="RetCode"/>
+                            <RetMsg metadataid="RetMsg"/>
+                        </sdo>
+                    </RetInf>
+                </array>
+                <PrvdSysSvrId metadataid="PrvdSysSvrId"/>
+                <UserLang metadataid="UserLang"/>
+            </SYS_HEAD>
+            <APP_HEAD>
+                <TellerId metadataid="TellerId"/>
+                <BranchId metadataid="BranchId"/>
+                <TlrPswd metadataid="TlrPswd"/>
+                <TlrLvl metadataid="TlrLvl"/>
+                <TlrType metadataid="TlrType"/>
+                <ChkFlag metadataid="ChkFlag"/>
+                <AuthFlag metadataid="AuthFlag"/>
+                <AuthTlrId metadataid="AuthTlrId"/>
+                <AuthBrId metadataid="AuthBrId"/>
+            </APP_HEAD>
+            ${response}$
+        </sdoroot>
+    </response>
+</esb_xml>

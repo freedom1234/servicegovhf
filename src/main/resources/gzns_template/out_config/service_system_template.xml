@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="gb18030"?>
+<msg package_type="xml" store-mode="GB2312">
+	<comm_head>
+		${reqHead}$
+	</comm_head>
+	<main_data>
+		${request}$
+	</main_data>
+</msg>

@@ -1,0 +1,66 @@
+{
+  "edges": [
+    {
+      "source": "4028abd84fcfe459014fd00d9e3702d4",
+      "target": "4028abd84fcfe459014fd00e1ce50a8a"
+    },
+    {
+      "source": "4028abd84fcfe459014fd00e1ce50a8a",
+      "target": "4028abd84fcfe459014fd00e1ca40a2e"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "4028abd84fcfe459014fd00e1ca40a2e",
+      "name": "0303_01_CK(存款业务)",
+      "type": "table",
+      "left": "2300",
+      "top": "100",
+      "columns": [
+        {
+          "id": "服务场景:0100100000101(存款:活期存款)",
+          "datatype": "varchar",
+          "icons": null
+        },
+        {
+          "id": "系统:COREBANK(核心业务系统)",
+          "datatype": "varchar",
+          "icons": null
+        }
+      ]
+    },
+    {
+      "id": "4028abd84fcfe459014fd00d9e3702d4",
+      "name": "ATMTAL_01_CK(预约存款、取款设备连接)",
+      "type": "table",
+      "left": "1800",
+      "top": "100",
+      "columns": [
+        {
+          "id": "服务场景:0100200000901(预约存取款设备状态维护:预约存取款设备连接)",
+          "datatype": "varchar",
+          "icons": null
+        },
+        {
+          "id": "系统:COREBANK(核心业务系统)",
+          "datatype": "varchar",
+          "icons": null
+        }
+      ]
+    },
+    {
+      "id": "4028abd84fcfe459014fd00e1ce50a8a",
+      "name": "0100100000101",
+      "type": "table",
+      "left": "2050",
+      "top": "100",
+      "columns": [
+        {
+          "id": "系统:IFE(综合前端系统)",
+          "datatype": "varchar",
+          "icons": null
+        }
+      ]
+    }
+  ]
+}

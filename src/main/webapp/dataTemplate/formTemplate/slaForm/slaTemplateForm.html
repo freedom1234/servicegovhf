@@ -1,0 +1,126 @@
+<meta http-equiv ="X-UA-Compatible" content ="IE=edge" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<table id="slaTemplateTable" style="height:auto; width:auto;"
+	title=""
+	data-options="rownumbers:true,singleSelect:true,url:'/slaTemplate/getAll',method:'get',toolbar:slaTemplatetoolbar,pagination:true,
+				pageSize:10">
+	<thead>
+		<tr>
+			<th data-options="field:'productid',checkbox:true"></th>
+			<th field="slaTemplateId" width="100" editor="text" id="idText"
+				data-options="hidden:true">ID</th>
+			<th field="templateName" width="100" editor="text" align="center">SLA模板名称</th>
+			<th field="desc" width="150" align="center" editor="text">描 述</th>
+		</tr>
+	</thead>
+</table>
+<div id="w" class="easyui-window" title=""
+	data-options="modal:true,closed:true,iconCls:'icon-add'"
+	style="width:500px;height:200px;padding:10px;"></div>
+<script type="text/javascript" src="/assets/slaTemplate/js/slaTemplateManager.js"></script>
+<script type="text/javascript" src="/assets/sla/js/slaManager.js"></script>
+<script type="text/javascript">
+	
+	
+	var slaTemplatetoolbar = [
+			{
+				text : '新增',
+				iconCls : 'icon-add',
+				handler : function() {
+					$('#slaTemplateTable').edatagrid('addRow');
+					}
+			},{
+				text : '编辑',
+				iconCls : 'icon-edit',
+				handler : function() {
+				
+				var row = $('#slaTemplateTable').datagrid("getSelected");
+					var content = '<iframe scrolling="auto" frameborder="0"  src="/dataTemplate/serviceadmin/template.jsp?slaTemplateId='+row.slaTemplateId+'" style="width:100%;height:100%;"></iframe>';
+// 					alert(content);
+					parent.parent.parent.addTab('服务场景', content);
+					}
+			},
+			{
+				text : '删除',
+				iconCls : 'icon-remove',
+				handler : function() {
+					var row = $('#slaTemplateTable').edatagrid('getSelected');
+					var rowIndex = $('#slaTemplateTable').edatagrid(
+							'getRowIndex', row);
+					$('#slaTemplateTable').edatagrid('deleteRow', rowIndex);
+				}
+			},
+			{
+				text : ' 保存',
+				iconCls : 'icon-save',
+				handler : function() {
+					var deletedDatas = $('#slaTemplateTable').edatagrid(
+							'getChanges', 'deleted');
+					var addDatas = $('#slaTemplateTable').edatagrid(
+							'getChanges', 'inserted');
+					var updatedDatas = $('#slaTemplateTable').edatagrid('getChanges',
+						'updated');
+					for ( var i = 0; i < addDatas.length; i++) {
+						var addData = addDatas[i];
+						var data = {};
+						if (addData.templateName) {
+							data.templateName = addData.templateName;
+							data.desc = addData.desc;
+							slaTemplateManager.add(data, function(result) {
+								if (result) {
+									alert(result);
+									alert("保存成功");
+								} else {
+									alert("保存失败");
+								}
+							});
+						}
+					}
+					for ( var j = 0; j < deletedDatas.length; j++) {
+						var deleteData = deletedDatas[j];
+						slaTemplateManager.deleteById(deleteData.slaTemplateId,
+								function(result) {
+									if (result) {
+										alert("删除成功");
+									} else {
+										alert("删除失败");
+									}
+								});
+					}
+					for ( var k = 0; k < updatedDatas.length; k++) {
+						var updatedData = updatedDatas[k];
+						var data = {};
+						data.slaTemplateId=updatedData.slaTemplateId;
+						data.templateName = updatedData.templateName;
+						data.desc = updatedData.desc;
+						slaTemplateManager.modify(data, function(result) {
+							if (result) {
+								alert("修改成功");
+							} else {
+								alert("修改失败");
+							}
+						});
+					}
+				}
+			}, {
+				text : '选择',
+				iconCls : 'icon-qxfp',
+				handler : function() {
+					var info = $('#slaTemplateTable').edatagrid('getSelected');
+					slaManager.getByParams(info.slaTemplateId,function(result){
+						$('#tt').edatagrid('loadData',result);
+					});
+					$('#w').window('close');
+				}
+			} ];
+	$(function() {
+		$('#slaTemplateTable').edatagrid({
+			autoSave : false,
+			saveUrl : '/',
+			updateUrl : '/',
+			destroyUrl : '/'
+		});
+
+	});
+</script>

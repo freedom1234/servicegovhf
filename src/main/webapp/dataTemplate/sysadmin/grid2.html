@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv ="X-UA-Compatible" content ="IE=edge" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="/resources/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="/resources/themes/icon.css">
+<link href="/resources/css/ui.css" rel="stylesheet" type="text/css">
+	 <script type="text/javascript" src="/resources/js/jquery.min.js"></script> 
+        <script type="text/javascript" src="/resources/js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/resources/js/treegrid-dnd.js"></script>
+
+<script type="text/javascript" src="/resources/js/ui.js"></script>
+<script type="text/javascript">
+var editingId;
+	var toolbar = [{
+			text:'保存',
+			iconCls:'icon-save',
+			handler:function(){
+			    
+				
+			}
+		}]
+		function onContextMenu(e,row){
+			e.preventDefault();
+			$(this).treegrid('select', row.id);
+			$('#mm').menu('show',{
+				left: e.pageX,
+				top: e.pageY
+			});
+		}
+		function removeIt(){
+			var node = $('#tg').treegrid('getSelected');
+			if (node){
+				$('#tg').treegrid('remove', node.id);
+			}
+		}
+		function editIt(){
+			
+				
+				
+				var row = $('#tg').treegrid('getSelected');
+				
+				if (row){
+					editingId = row.id
+					$('#tg').treegrid('beginEdit', editingId);
+					
+					$("#upbtn"+editingId).hide();
+					$("#downbtn"+editingId).hide();
+					
+					$("#cancelbtn"+editingId).show();
+					$("#okbtn"+editingId).show();
+				}
+		}
+		var idIndex=999;
+		function append(){
+			idIndex++;
+			var d1 = new Date();
+			var d2 = new Date();
+			d2.setMonth(d2.getMonth()+1);
+			var node = $('#tg').treegrid('getSelected');
+			$('#tg').treegrid('append',{
+				parent: node.id,
+				data: [{
+					id: idIndex,
+					name: 'New Task'+idIndex,
+					persons: parseInt(Math.random()*10),
+					begin: $.fn.datebox.defaults.formatter(d1),
+					end: $.fn.datebox.defaults.formatter(d2)
+				}]
+			})
+			editingId = idIndex;
+			$('#tg').treegrid('reloadFooter');
+			$('#tg').treegrid('beginEdit', idIndex);
+		}
+		function save(id){
+			
+			if (editingId != undefined&&editingId==id){
+				var t = $('#tg');
+				t.treegrid('endEdit', editingId);
+				editingId = undefined;
+				var persons = 0;
+				var rows = t.treegrid('getChildren');
+				for(var i=0; i<rows.length; i++){
+					var p = parseInt(rows[i].persons);
+					if (!isNaN(p)){
+						persons += p;
+					}
+				}
+				var frow = t.treegrid('getFooterRows')[0];
+				frow.persons = persons;
+				t.treegrid('reloadFooter');
+			}
+		}
+		function cancel(){
+			if (editingId != undefined){
+				$('#tg').treegrid('cancelEdit', editingId);
+				editingId = undefined;
+			}
+		}
+		function formatConsole(value){
+	    	
+		    	
+				var s = '<a iconcls="icon-up" style="margin-top:5px;margin-bottom:5px;margin-left:5px;" class="easyui-linkbutton l-btn l-btn-small" href="#" group="" id="upbtn'+value+'"><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text">上移</span><span class="l-btn-icon icon-up">&nbsp;</span></span></a>';
+				s += '<a iconcls="icon-down" style="margin-top:5px;margin-bottom:5px;margin-left:5px;" class="easyui-linkbutton l-btn l-btn-small" href="#" group=""  id="downbtn'+value+'"><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text">下移</span><span class="l-btn-icon icon-down">&nbsp;</span></span></a>';
+				 s += '<a iconcls="icon-close" onclick="cancel()" style="display:none;margin-top:5px;margin-bottom:5px;margin-left:5px;" class="easyui-linkbutton l-btn l-btn-small" href="#" group="" id="cancelbtn'+value+'"><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text">取消</span><span class="l-btn-icon icon-cancel">&nbsp;</span></span></a>';
+				 s += '<a iconcls="icon-ok" onclick="save('+value+')" style="display:none;margin-top:5px;margin-bottom:5px;margin-left:5px;" class="easyui-linkbutton l-btn l-btn-small" href="#" group="" id="okbtn'+value+'"><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text">确认</span><span class="l-btn-icon icon-ok">&nbsp;</span></span></a>';
+		    	return s;
+	    	
+		}
+</script>
+</head>
+<body >
+<div id="mm" class="easyui-menu" style="width:120px;">
+		<div onclick="append()" data-options="iconCls:'icon-add'">新增</div>
+		<div onclick="editIt()" data-options="iconCls:'icon-edit'">编辑</div>
+		<div onclick="removeIt()" data-options="iconCls:'icon-remove'">删除</div>
+
+	</div>
+    <fieldset>
+ <legend>接口基本信息</legend>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+      <th>交易码</th>
+    <td> <input class="easyui-textbox" type="text" name="name" ></td>
+   
+   <th>交易名称</th>
+    <td> <input class="easyui-textbox" type="text" name="name" >
+      </td>
+   <th>接口功能描述</th>
+    <td> <input class="easyui-textbox" type="text" name="name" ></td>
+  </tr>
+  <tr>
+     <th>交易状态</th>
+    <td><select class="easyui-combobox" panelHeight="auto" style="width:155px">
+				<option value="java">节点1</option>
+				<option value="c">节点2</option>
+				<option value="basic">节点3</option>
+				<option value="perl">节点4</option>
+			</select></td>
+    <th>报文头</th>
+    <td><select class="easyui-combobox" panelHeight="auto" style="width:155px">
+				<option value="java">节点1</option>
+				<option value="c">节点2</option>
+				<option value="basic">节点3</option>
+				<option value="perl">节点4</option>
+			</select></td>
+     <th> 通讯协议</th>
+    <td> <select class="easyui-combobox" panelHeight="auto" style="width:155px">
+				<option value="java">节点1</option>
+				<option value="c">节点2</option>
+				<option value="basic">节点3</option>
+				<option value="perl">节点4</option>
+			</select></td>
+  </tr>
+
+</table>
+
+
+</fieldset>
+	<table title="定义接口" class="easyui-treegrid" id="tg" style="height:370px; width:auto;"
+			data-options="
+				iconCls: 'icon-ok',
+				rownumbers: true,
+				animate: true,
+				collapsible: true,
+				fitColumns: true,
+				url: 'data.json',
+				method: 'get',
+				idField: 'id',
+				treeField: 'name',
+                toolbar:toolbar,
+                onContextMenu:onContextMenu
+			">
+		<thead>
+			<tr>
+				<th data-options="field:'name',width:180,editor:'text'">Task Name</th>
+				<th data-options="field:'persons',width:60,align:'right',editor:'numberbox'">Persons</th>
+				<th data-options="field:'begin',width:80,editor:'datebox'">Begin Date</th>
+				<th data-options="field:'end',width:80,editor:'datebox'">End Date</th>
+               <th data-options="field:'id',width:120,formatter:formatConsole">操作</th>
+				
+			</tr>
+		</thead>
+	</table>
+    
+  
+
+</body>
+</html>

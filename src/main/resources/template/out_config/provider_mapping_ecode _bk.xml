@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping-config>
+	<tran id="0902" channel="COREBANK">
+			<request-mapping base="default" dict="COREBANK">
+			    <request-head channel="COREBANK"/>
+				<!-- 交易码    -->
+				<item name="BODY._jym">"0902"</item> 				
+				<!-- 后台服务名称 -->
+				<item name="BODY.TradeName">"ckyw"</item>
+				<!-- 服务标识码 -->
+				<item name="SYS_HEAD.UniPkgID">"ckyw"</item>
+
+				<!-- 账号卡号    -->
+				<item name="BODY.__ZH">""</item>
+				<item name="BODY.__ZH">in.BODY.ACCT_NO</item> 
+				<!-- 旧密码    -->
+				<item name="BODY.JFMM">""</item> 
+				<item name="BODY.JFMM">in.BODY.OLD_PASSWORD</item> 
+				<!-- 单折号码    -->
+				<item name="BODY.N201">""</item>
+				<item name="BODY.N201">in.BODY.DEP_BOOK_ID</item>
+				<!-- 心支取方式    -->
+				<item name="BODY.I012">in.BODY.DRAW_TYPE</item>
+				<!-- 新密码    -->
+				<item name="BODY.T061">""</item> 
+				<item name="BODY.T061">in.BODY.PASSWORD</item>
+				<!-- 借方证件类型    -->
+				<item name="BODY.JZJL">""</item>
+				<item name="BODY.JZJL">com.drcb.esb.mapping.convcode.DataConvert.getSrcCode("COREBANK","GLOBAL_TYPE",in.BODY.GLOBAL_TYPE,"")</item>
+				<!-- 借方证件号    -->
+				<item name="BODY.JZJH">""</item>
+				<item name="BODY.JZJH">in.BODY.GLOBAL_ID</item>
+
+				<!-- 余额方向 -->
+				<item name="BODY.C200">""</item>
+				<item name="BODY.C200">in.BODY.BAL_FLAG</item>
+				
+			</request-mapping>
+			<response-mapping base="default" dict="esb">
+				<response-head channel="COREBANK"/>
+
+				<!-- 操作时间 -->
+				<item name="SYS_HEAD.TRAN_TIMESTAMP">in.BODY.CZSJ</item>
+				<item name="BODY.PRINT_FILE_ARRAY">in.BODY.PRINT_FILE_ARRAY</item>
+				<!-- 服务处理返回流水号 -->
+				<item name="APP_HEAD.SERV_SEQ_NO">in.BODY.v_gylsh</item>
+	
+			</response-mapping>
+			
+			<error-mapping base="default" dict="esb"> 
+				<error-head channel="COREBANK"/>			
+			</error-mapping>
+	</tran>
+</mapping-config>

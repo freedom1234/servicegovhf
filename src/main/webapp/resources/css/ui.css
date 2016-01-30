@@ -1,0 +1,88 @@
+html{
+	height:100%
+}
+body{
+	height:100%;
+	
+}
+.icon-guaqi {
+	background-attachment: scroll;
+	background-color: rgba(0, 0, 0, 0);
+	background-image: url(../themes/icons/278.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.icon-cfp {
+	background-attachment: scroll;
+	background-color: rgba(0, 0, 0, 0);
+	background-image: url(../themes/icons/056.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.icon-qxfp {
+	background-attachment: scroll;
+	background-color: rgba(0, 0, 0, 0);
+	background-image: url(../themes/icons/261.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.icon-up {
+	background-attachment: scroll;
+	background-color: rgba(0, 0, 0, 0);
+	background-image: url(../themes/icons/060.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.icon-down {
+	background-attachment: scroll;
+	background-color: rgba(0, 0, 0, 0);
+	background-image: url(../themes/icons/043.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.formui table{
+	width:100%;	
+}
+.formui th{
+	paddint-top:5px;
+	padding-bottom:5px;	
+	padding-right:10px;
+	width:120px;
+}
+.formui td{
+	paddint-top:5px;
+	padding-bottom:5px;	
+}
+.win-bbar{
+	text-align:right;
+	padding-right:10px;
+}
+.win-bbar a{
+	margin-left:10px;
+}
+.window-body{
+	padding:10px;	
+}
+fieldset{
+	margin: 0px;
+	background: #f4f4f4 none repeat scroll 0 0;
+	margin-bottom: 10px;
+	border: 1px solid #95b8e7;
+}
+fieldset th{
+	font-size:12px;
+	text-align:left;
+		padding-bottom:10px;
+
+}
+fieldset td{
+	padding-right:10px;
+	padding-left:10px;
+	padding-bottom:10px;
+}
+legend{
+color: #0e2d5f;
+    font-size: 12px;
+    font-weight: bold;	
+}
